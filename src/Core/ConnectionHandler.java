@@ -9,6 +9,11 @@ import org.apache.mina.util.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Defines the basic connection workflow
+ * @author Andrew
+ *
+ */
 public class ConnectionHandler extends IoHandlerAdapter {
 	private static Logger logger = LoggerFactory.getLogger(ConnectionHandler.class);
 	
@@ -23,13 +28,13 @@ public class ConnectionHandler extends IoHandlerAdapter {
 	}
 	
 	/**
-	 * Authenticate user here?
+	 * TODO: Authenticate user here?
 	 */
 	@Override
 	public void sessionOpened(IoSession session)
 	{
-		logger.info("Anon connected.");
-		session.write("Welcome to Mina!");
+		logger.info("Anonymous user has established a connection.");
+		session.write(ConnectionStrings.Welcome);
 	}
 	
 	
@@ -46,9 +51,11 @@ public class ConnectionHandler extends IoHandlerAdapter {
     @Override
     public void messageReceived( IoSession session, Object message ) throws Exception
     {
+    	// Parse command through IOC method?
         String str = message.toString();
+        
         if(str.trim().equalsIgnoreCase("quit") || str.trim().equalsIgnoreCase("exit")) {
-        	logger.info("Anon Disconnecting.");
+        	logger.info("Anonymous user has disconnected");
             session.close(true);
             return;
         }
@@ -66,7 +73,7 @@ public class ConnectionHandler extends IoHandlerAdapter {
     }
     
     /**
-     * Clean-up used threads? Unsure if Mina will do this for us...
+     * TODO: Clean-up used threads? Unsure if Mina will do this for us...
      */
     @Override
     public void sessionClosed(IoSession session)
