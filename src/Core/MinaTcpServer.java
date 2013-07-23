@@ -2,15 +2,9 @@ package Core;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.nio.charset.Charset;
 
 import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.service.IoAcceptor;
-import org.apache.mina.filter.codec.ProtocolCodecFilter;
-import org.apache.mina.filter.codec.textline.LineDelimiter;
-import org.apache.mina.filter.codec.textline.TextLineCodecFactory;
-import org.apache.mina.filter.logging.LogLevel;
-import org.apache.mina.filter.logging.LoggingFilter;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,12 +32,12 @@ public class MinaTcpServer {
 	 */
 	public static void main(String[] args) {
 		logger.info("Setting Configurations.");
+		//MudConfig.Logging.InitConfig();
 		server.getFilterChain().addLast( "logger", MudConfig.Logging.GetFilter());
 		server.getFilterChain().addLast( "codec", MudConfig.TextOutput.GetNewlineOutput());
 		
 		// Set how we handle the connections
 		server.setHandler(new ConnectionHandler());
-		
 		server.getSessionConfig().setReadBufferSize(2048);
 		server.getSessionConfig().setIdleTime(IdleStatus.BOTH_IDLE, MudConfig.GAME_TICK);
         

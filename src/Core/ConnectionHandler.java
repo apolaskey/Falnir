@@ -1,6 +1,7 @@
 package Core;
 
 import java.util.Date;
+import java.util.Set;
 
 import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.service.IoHandlerAdapter;
@@ -23,7 +24,7 @@ public class ConnectionHandler extends IoHandlerAdapter {
 	@Override
 	public void sessionCreated(IoSession session)
 	{
-		logger.info("Incoming connection on address {}", session.getLocalAddress());
+		logger.info("Incoming connection on address {}", session.getRemoteAddress());
 		
 	}
 	
@@ -59,7 +60,7 @@ public class ConnectionHandler extends IoHandlerAdapter {
             session.close(true);
             return;
         }
-        
+        logger.info("Address {} sent {} to server.", session.getRemoteAddress(), str);
         session.write("Echo: " + message.toString());
     }
 

@@ -1,0 +1,4 @@
+[2013-07-23 00:12:43] [ INFO ] [MinaTcpServer:34] - Setting Configurations.
+[2013-07-23 00:12:43] [ INFO ] [MinaTcpServer:46] - Starting Server on port 9123
+[2013-07-23 00:13:15] [ INFO ] [MinaTcpServer:34] - Setting Configurations.
+[2013-07-23 00:13:15] [ INFO ] [MinaTcpServer:46] - Starting Server on port 9123
