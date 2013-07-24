@@ -241,3 +241,11 @@
 [2013-07-23 21:04:34] [ INFO ] [LoggingFilter:186] - IDLE
 [2013-07-23 21:04:41] [ INFO ] [LoggingFilter:186] - CLOSED
 [2013-07-23 21:04:41] [ INFO ] [LoggingFilter:186] - CLOSED
+[2013-07-23 22:40:14] [ INFO ] [LoggingFilter:186] - CREATED
+[2013-07-23 22:40:14] [ INFO ] [ConnectionHandler:27] - Incoming connection on address /184.89.224.239:50571
+[2013-07-23 22:40:14] [ INFO ] [LoggingFilter:186] - OPENED
+[2013-07-23 22:40:14] [ INFO ] [ConnectionHandler:37] - Anonymous user has established a connection.
+[2013-07-23 22:40:14] [ INFO ] [LoggingFilter:157] - SENT: HeapBuffer[pos=0 lim=0 cap=0: empty]
+[2013-07-23 22:40:26] [ INFO ] [LoggingFilter:186] - CLOSED
+[2013-07-24 19:14:42] [ INFO ] [MinaTcpServer:34] - Setting Configurations.
+[2013-07-24 19:14:42] [ INFO ] [MinaTcpServer:46] - Starting Server on port 9123
