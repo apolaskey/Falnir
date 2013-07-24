@@ -2,3 +2,242 @@
 [2013-07-23 00:12:43] [ INFO ] [MinaTcpServer:46] - Starting Server on port 9123
 [2013-07-23 00:13:15] [ INFO ] [MinaTcpServer:34] - Setting Configurations.
 [2013-07-23 00:13:15] [ INFO ] [MinaTcpServer:46] - Starting Server on port 9123
+[2013-07-23 20:37:20] [ INFO ] [MinaTcpServer:34] - Setting Configurations.
+[2013-07-23 20:37:20] [ INFO ] [MinaTcpServer:46] - Starting Server on port 9123
+[2013-07-23 20:37:26] [ INFO ] [LoggingFilter:186] - CREATED
+[2013-07-23 20:37:26] [ INFO ] [ConnectionHandler:27] - Incoming connection on address /184.89.224.239:64608
+[2013-07-23 20:37:26] [ INFO ] [LoggingFilter:186] - OPENED
+[2013-07-23 20:37:26] [ INFO ] [ConnectionHandler:37] - Anonymous user has established a connection.
+[2013-07-23 20:37:26] [ INFO ] [LoggingFilter:157] - SENT: HeapBuffer[pos=0 lim=0 cap=0: empty]
+[2013-07-23 20:37:26] [ INFO ] [LoggingFilter:186] - CLOSED
+[2013-07-23 20:38:03] [ INFO ] [LoggingFilter:186] - CREATED
+[2013-07-23 20:38:03] [ INFO ] [ConnectionHandler:27] - Incoming connection on address /184.89.224.239:64622
+[2013-07-23 20:38:03] [ INFO ] [LoggingFilter:186] - OPENED
+[2013-07-23 20:38:03] [ INFO ] [ConnectionHandler:37] - Anonymous user has established a connection.
+[2013-07-23 20:38:03] [ INFO ] [LoggingFilter:157] - SENT: HeapBuffer[pos=0 lim=0 cap=0: empty]
+[2013-07-23 20:38:03] [ INFO ] [LoggingFilter:186] - CLOSED
+[2013-07-23 20:39:17] [ INFO ] [LoggingFilter:186] - CREATED
+[2013-07-23 20:39:17] [ INFO ] [ConnectionHandler:27] - Incoming connection on address /184.89.224.239:64710
+[2013-07-23 20:39:17] [ INFO ] [LoggingFilter:186] - OPENED
+[2013-07-23 20:39:17] [ INFO ] [ConnectionHandler:37] - Anonymous user has established a connection.
+[2013-07-23 20:39:17] [ INFO ] [LoggingFilter:157] - SENT: HeapBuffer[pos=0 lim=0 cap=0: empty]
+[2013-07-23 20:39:17] [ INFO ] [LoggingFilter:186] - CLOSED
+[2013-07-23 20:40:25] [ INFO ] [LoggingFilter:186] - CREATED
+[2013-07-23 20:40:25] [ INFO ] [ConnectionHandler:27] - Incoming connection on address /184.89.224.239:64718
+[2013-07-23 20:40:25] [ INFO ] [LoggingFilter:186] - OPENED
+[2013-07-23 20:40:25] [ INFO ] [ConnectionHandler:37] - Anonymous user has established a connection.
+[2013-07-23 20:40:25] [ INFO ] [LoggingFilter:157] - SENT: HeapBuffer[pos=0 lim=0 cap=0: empty]
+[2013-07-23 20:41:10] [ INFO ] [LoggingFilter:186] - IDLE
+[2013-07-23 20:41:26] [ INFO ] [LoggingFilter:186] - IDLE
+[2013-07-23 20:41:42] [ INFO ] [LoggingFilter:186] - IDLE
+[2013-07-23 20:41:58] [ INFO ] [LoggingFilter:186] - IDLE
+[2013-07-23 20:42:33] [ INFO ] [LoggingFilter:186] - CLOSED
+[2013-07-23 20:54:25] [ INFO ] [LoggingFilter:186] - CREATED
+[2013-07-23 20:54:25] [ INFO ] [ConnectionHandler:27] - Incoming connection on address /107.23.50.52:38963
+[2013-07-23 20:54:25] [ INFO ] [LoggingFilter:186] - OPENED
+[2013-07-23 20:54:25] [ INFO ] [ConnectionHandler:37] - Anonymous user has established a connection.
+[2013-07-23 20:54:25] [ INFO ] [LoggingFilter:157] - SENT: HeapBuffer[pos=0 lim=0 cap=0: empty]
+[2013-07-23 20:54:29] [ INFO ] [ConnectionHandler:63] - Address /107.23.50.52:38963 sent lol to server.
+[2013-07-23 20:54:29] [ INFO ] [LoggingFilter:157] - SENT: HeapBuffer[pos=0 lim=0 cap=0: empty]
+[2013-07-23 20:54:45] [ INFO ] [LoggingFilter:186] - IDLE
+[2013-07-23 20:55:01] [ INFO ] [LoggingFilter:186] - IDLE
+[2013-07-23 20:55:13] [ INFO ] [LoggingFilter:186] - CLOSED
+[2013-07-23 20:55:39] [ INFO ] [LoggingFilter:186] - CREATED
+[2013-07-23 20:55:39] [ INFO ] [ConnectionHandler:27] - Incoming connection on address /184.89.224.239:65421
+[2013-07-23 20:55:39] [ INFO ] [LoggingFilter:186] - OPENED
+[2013-07-23 20:55:39] [ INFO ] [ConnectionHandler:37] - Anonymous user has established a connection.
+[2013-07-23 20:55:39] [ INFO ] [LoggingFilter:157] - SENT: HeapBuffer[pos=0 lim=0 cap=0: empty]
+[2013-07-23 20:55:45] [ INFO ] [LoggingFilter:186] - CLOSED
+[2013-07-23 20:56:03] [ INFO ] [LoggingFilter:186] - CREATED
+[2013-07-23 20:56:03] [ INFO ] [ConnectionHandler:27] - Incoming connection on address /184.89.224.239:65431
+[2013-07-23 20:56:03] [ INFO ] [LoggingFilter:186] - OPENED
+[2013-07-23 20:56:03] [ INFO ] [ConnectionHandler:37] - Anonymous user has established a connection.
+[2013-07-23 20:56:03] [ INFO ] [LoggingFilter:157] - SENT: HeapBuffer[pos=0 lim=0 cap=0: empty]
+[2013-07-23 20:56:25] [ INFO ] [LoggingFilter:186] - IDLE
+[2013-07-23 20:56:26] [ INFO ] [LoggingFilter:186] - CLOSED
+[2013-07-23 20:59:02] [ INFO ] [LoggingFilter:186] - CREATED
+[2013-07-23 20:59:02] [ INFO ] [ConnectionHandler:27] - Incoming connection on address /184.89.224.239:65476
+[2013-07-23 20:59:02] [ INFO ] [LoggingFilter:186] - OPENED
+[2013-07-23 20:59:02] [ INFO ] [ConnectionHandler:37] - Anonymous user has established a connection.
+[2013-07-23 20:59:02] [ INFO ] [LoggingFilter:157] - SENT: HeapBuffer[pos=0 lim=0 cap=0: empty]
+[2013-07-23 20:59:05] [ INFO ] [ConnectionHandler:63] - Address /184.89.224.239:65476 sent lol to server.
+[2013-07-23 20:59:05] [ INFO ] [LoggingFilter:157] - SENT: HeapBuffer[pos=0 lim=0 cap=0: empty]
+[2013-07-23 20:59:07] [ INFO ] [ConnectionHandler:63] - Address /184.89.224.239:65476 sent sweet to server.
+[2013-07-23 20:59:07] [ INFO ] [LoggingFilter:157] - SENT: HeapBuffer[pos=0 lim=0 cap=0: empty]
+[2013-07-23 20:59:15] [ INFO ] [ConnectionHandler:59] - Anonymous user has disconnected
+[2013-07-23 20:59:15] [ INFO ] [LoggingFilter:186] - CLOSED
+[2013-07-23 21:01:43] [ INFO ] [LoggingFilter:186] - CREATED
+[2013-07-23 21:01:43] [ INFO ] [ConnectionHandler:27] - Incoming connection on address /184.89.224.239:65483
+[2013-07-23 21:01:43] [ INFO ] [LoggingFilter:186] - OPENED
+[2013-07-23 21:01:43] [ INFO ] [ConnectionHandler:37] - Anonymous user has established a connection.
+[2013-07-23 21:01:43] [ INFO ] [LoggingFilter:157] - SENT: HeapBuffer[pos=0 lim=0 cap=0: empty]
+[2013-07-23 21:01:59] [ INFO ] [LoggingFilter:186] - IDLE
+[2013-07-23 21:02:04] [ INFO ] [LoggingFilter:186] - CREATED
+[2013-07-23 21:02:04] [ INFO ] [ConnectionHandler:27] - Incoming connection on address /184.89.224.239:52506
+[2013-07-23 21:02:04] [ INFO ] [LoggingFilter:186] - OPENED
+[2013-07-23 21:02:04] [ INFO ] [ConnectionHandler:37] - Anonymous user has established a connection.
+[2013-07-23 21:02:04] [ INFO ] [LoggingFilter:157] - SENT: HeapBuffer[pos=0 lim=0 cap=0: empty]
+[2013-07-23 21:02:15] [ INFO ] [LoggingFilter:186] - IDLE
+[2013-07-23 21:02:20] [ INFO ] [LoggingFilter:186] - IDLE
+[2013-07-23 21:02:27] [ INFO ] [ConnectionHandler:59] - Anonymous user has disconnected
+[2013-07-23 21:02:27] [ INFO ] [LoggingFilter:186] - CLOSED
+[2013-07-23 21:02:30] [ INFO ] [LoggingFilter:186] - CREATED
+[2013-07-23 21:02:30] [ INFO ] [ConnectionHandler:27] - Incoming connection on address /184.89.224.239:52590
+[2013-07-23 21:02:30] [ INFO ] [LoggingFilter:186] - OPENED
+[2013-07-23 21:02:30] [ INFO ] [ConnectionHandler:37] - Anonymous user has established a connection.
+[2013-07-23 21:02:30] [ INFO ] [LoggingFilter:157] - SENT: HeapBuffer[pos=0 lim=0 cap=0: empty]
+[2013-07-23 21:02:31] [ INFO ] [LoggingFilter:186] - IDLE
+[2013-07-23 21:02:32] [ INFO ] [ConnectionHandler:59] - Anonymous user has disconnected
+[2013-07-23 21:02:32] [ INFO ] [LoggingFilter:186] - CLOSED
+[2013-07-23 21:02:32] [ INFO ] [LoggingFilter:186] - CREATED
+[2013-07-23 21:02:32] [ INFO ] [ConnectionHandler:27] - Incoming connection on address /184.89.224.239:52603
+[2013-07-23 21:02:32] [ INFO ] [LoggingFilter:186] - OPENED
+[2013-07-23 21:02:32] [ INFO ] [ConnectionHandler:37] - Anonymous user has established a connection.
+[2013-07-23 21:02:32] [ INFO ] [LoggingFilter:157] - SENT: HeapBuffer[pos=0 lim=0 cap=0: empty]
+[2013-07-23 21:02:33] [ INFO ] [LoggingFilter:186] - CREATED
+[2013-07-23 21:02:33] [ INFO ] [ConnectionHandler:27] - Incoming connection on address /184.89.224.239:52604
+[2013-07-23 21:02:33] [ INFO ] [LoggingFilter:186] - OPENED
+[2013-07-23 21:02:33] [ INFO ] [ConnectionHandler:37] - Anonymous user has established a connection.
+[2013-07-23 21:02:33] [ INFO ] [LoggingFilter:157] - SENT: HeapBuffer[pos=0 lim=0 cap=0: empty]
+[2013-07-23 21:02:33] [ INFO ] [ConnectionHandler:59] - Anonymous user has disconnected
+[2013-07-23 21:02:33] [ INFO ] [LoggingFilter:186] - CLOSED
+[2013-07-23 21:02:34] [ INFO ] [LoggingFilter:186] - CREATED
+[2013-07-23 21:02:34] [ INFO ] [ConnectionHandler:27] - Incoming connection on address /184.89.224.239:52607
+[2013-07-23 21:02:34] [ INFO ] [LoggingFilter:186] - OPENED
+[2013-07-23 21:02:34] [ INFO ] [ConnectionHandler:37] - Anonymous user has established a connection.
+[2013-07-23 21:02:34] [ INFO ] [LoggingFilter:157] - SENT: HeapBuffer[pos=0 lim=0 cap=0: empty]
+[2013-07-23 21:02:34] [ INFO ] [ConnectionHandler:59] - Anonymous user has disconnected
+[2013-07-23 21:02:34] [ INFO ] [LoggingFilter:186] - CLOSED
+[2013-07-23 21:02:34] [ INFO ] [LoggingFilter:186] - CREATED
+[2013-07-23 21:02:34] [ INFO ] [ConnectionHandler:27] - Incoming connection on address /184.89.224.239:52610
+[2013-07-23 21:02:34] [ INFO ] [LoggingFilter:186] - OPENED
+[2013-07-23 21:02:34] [ INFO ] [ConnectionHandler:37] - Anonymous user has established a connection.
+[2013-07-23 21:02:34] [ INFO ] [LoggingFilter:157] - SENT: HeapBuffer[pos=0 lim=0 cap=0: empty]
+[2013-07-23 21:02:35] [ INFO ] [LoggingFilter:186] - CREATED
+[2013-07-23 21:02:35] [ INFO ] [ConnectionHandler:27] - Incoming connection on address /184.89.224.239:52611
+[2013-07-23 21:02:35] [ INFO ] [LoggingFilter:186] - OPENED
+[2013-07-23 21:02:35] [ INFO ] [ConnectionHandler:37] - Anonymous user has established a connection.
+[2013-07-23 21:02:35] [ INFO ] [LoggingFilter:157] - SENT: HeapBuffer[pos=0 lim=0 cap=0: empty]
+[2013-07-23 21:02:35] [ INFO ] [ConnectionHandler:59] - Anonymous user has disconnected
+[2013-07-23 21:02:35] [ INFO ] [LoggingFilter:186] - CLOSED
+[2013-07-23 21:02:35] [ INFO ] [LoggingFilter:186] - CREATED
+[2013-07-23 21:02:35] [ INFO ] [ConnectionHandler:27] - Incoming connection on address /184.89.224.239:52617
+[2013-07-23 21:02:35] [ INFO ] [LoggingFilter:186] - OPENED
+[2013-07-23 21:02:35] [ INFO ] [ConnectionHandler:37] - Anonymous user has established a connection.
+[2013-07-23 21:02:35] [ INFO ] [LoggingFilter:157] - SENT: HeapBuffer[pos=0 lim=0 cap=0: empty]
+[2013-07-23 21:02:36] [ INFO ] [ConnectionHandler:59] - Anonymous user has disconnected
+[2013-07-23 21:02:36] [ INFO ] [LoggingFilter:186] - CLOSED
+[2013-07-23 21:02:36] [ INFO ] [LoggingFilter:186] - CREATED
+[2013-07-23 21:02:36] [ INFO ] [ConnectionHandler:27] - Incoming connection on address /184.89.224.239:52618
+[2013-07-23 21:02:36] [ INFO ] [LoggingFilter:186] - OPENED
+[2013-07-23 21:02:36] [ INFO ] [ConnectionHandler:37] - Anonymous user has established a connection.
+[2013-07-23 21:02:36] [ INFO ] [LoggingFilter:157] - SENT: HeapBuffer[pos=0 lim=0 cap=0: empty]
+[2013-07-23 21:02:36] [ INFO ] [ConnectionHandler:59] - Anonymous user has disconnected
+[2013-07-23 21:02:36] [ INFO ] [LoggingFilter:186] - CLOSED
+[2013-07-23 21:02:37] [ INFO ] [LoggingFilter:186] - CREATED
+[2013-07-23 21:02:37] [ INFO ] [ConnectionHandler:27] - Incoming connection on address /184.89.224.239:52622
+[2013-07-23 21:02:37] [ INFO ] [LoggingFilter:186] - OPENED
+[2013-07-23 21:02:37] [ INFO ] [ConnectionHandler:37] - Anonymous user has established a connection.
+[2013-07-23 21:02:37] [ INFO ] [LoggingFilter:157] - SENT: HeapBuffer[pos=0 lim=0 cap=0: empty]
+[2013-07-23 21:02:37] [ INFO ] [ConnectionHandler:59] - Anonymous user has disconnected
+[2013-07-23 21:02:37] [ INFO ] [LoggingFilter:186] - CLOSED
+[2013-07-23 21:02:37] [ INFO ] [LoggingFilter:186] - CREATED
+[2013-07-23 21:02:37] [ INFO ] [ConnectionHandler:27] - Incoming connection on address /184.89.224.239:52627
+[2013-07-23 21:02:37] [ INFO ] [LoggingFilter:186] - OPENED
+[2013-07-23 21:02:37] [ INFO ] [ConnectionHandler:37] - Anonymous user has established a connection.
+[2013-07-23 21:02:37] [ INFO ] [LoggingFilter:157] - SENT: HeapBuffer[pos=0 lim=0 cap=0: empty]
+[2013-07-23 21:02:37] [ INFO ] [LoggingFilter:186] - CREATED
+[2013-07-23 21:02:37] [ INFO ] [ConnectionHandler:27] - Incoming connection on address /184.89.224.239:52628
+[2013-07-23 21:02:37] [ INFO ] [LoggingFilter:186] - OPENED
+[2013-07-23 21:02:37] [ INFO ] [ConnectionHandler:37] - Anonymous user has established a connection.
+[2013-07-23 21:02:37] [ INFO ] [LoggingFilter:157] - SENT: HeapBuffer[pos=0 lim=0 cap=0: empty]
+[2013-07-23 21:02:38] [ INFO ] [LoggingFilter:186] - CREATED
+[2013-07-23 21:02:38] [ INFO ] [ConnectionHandler:27] - Incoming connection on address /184.89.224.239:52629
+[2013-07-23 21:02:38] [ INFO ] [LoggingFilter:186] - OPENED
+[2013-07-23 21:02:38] [ INFO ] [ConnectionHandler:37] - Anonymous user has established a connection.
+[2013-07-23 21:02:38] [ INFO ] [LoggingFilter:157] - SENT: HeapBuffer[pos=0 lim=0 cap=0: empty]
+[2013-07-23 21:02:38] [ INFO ] [ConnectionHandler:59] - Anonymous user has disconnected
+[2013-07-23 21:02:38] [ INFO ] [LoggingFilter:186] - CLOSED
+[2013-07-23 21:02:38] [ INFO ] [LoggingFilter:186] - CREATED
+[2013-07-23 21:02:38] [ INFO ] [ConnectionHandler:27] - Incoming connection on address /184.89.224.239:52630
+[2013-07-23 21:02:38] [ INFO ] [LoggingFilter:186] - OPENED
+[2013-07-23 21:02:38] [ INFO ] [ConnectionHandler:37] - Anonymous user has established a connection.
+[2013-07-23 21:02:38] [ INFO ] [LoggingFilter:157] - SENT: HeapBuffer[pos=0 lim=0 cap=0: empty]
+[2013-07-23 21:02:38] [ INFO ] [ConnectionHandler:59] - Anonymous user has disconnected
+[2013-07-23 21:02:38] [ INFO ] [LoggingFilter:186] - CLOSED
+[2013-07-23 21:02:39] [ INFO ] [LoggingFilter:186] - CREATED
+[2013-07-23 21:02:39] [ INFO ] [ConnectionHandler:27] - Incoming connection on address /184.89.224.239:52631
+[2013-07-23 21:02:39] [ INFO ] [LoggingFilter:186] - OPENED
+[2013-07-23 21:02:39] [ INFO ] [ConnectionHandler:37] - Anonymous user has established a connection.
+[2013-07-23 21:02:39] [ INFO ] [LoggingFilter:157] - SENT: HeapBuffer[pos=0 lim=0 cap=0: empty]
+[2013-07-23 21:02:39] [ INFO ] [ConnectionHandler:59] - Anonymous user has disconnected
+[2013-07-23 21:02:39] [ INFO ] [LoggingFilter:186] - CLOSED
+[2013-07-23 21:02:39] [ INFO ] [LoggingFilter:186] - CREATED
+[2013-07-23 21:02:39] [ INFO ] [ConnectionHandler:27] - Incoming connection on address /184.89.224.239:52635
+[2013-07-23 21:02:39] [ INFO ] [LoggingFilter:186] - OPENED
+[2013-07-23 21:02:39] [ INFO ] [ConnectionHandler:37] - Anonymous user has established a connection.
+[2013-07-23 21:02:39] [ INFO ] [LoggingFilter:157] - SENT: HeapBuffer[pos=0 lim=0 cap=0: empty]
+[2013-07-23 21:02:39] [ INFO ] [ConnectionHandler:59] - Anonymous user has disconnected
+[2013-07-23 21:02:39] [ INFO ] [LoggingFilter:186] - CLOSED
+[2013-07-23 21:02:40] [ INFO ] [LoggingFilter:186] - CREATED
+[2013-07-23 21:02:40] [ INFO ] [ConnectionHandler:27] - Incoming connection on address /184.89.224.239:52636
+[2013-07-23 21:02:40] [ INFO ] [LoggingFilter:186] - OPENED
+[2013-07-23 21:02:40] [ INFO ] [ConnectionHandler:37] - Anonymous user has established a connection.
+[2013-07-23 21:02:40] [ INFO ] [LoggingFilter:157] - SENT: HeapBuffer[pos=0 lim=0 cap=0: empty]
+[2013-07-23 21:02:40] [ INFO ] [ConnectionHandler:59] - Anonymous user has disconnected
+[2013-07-23 21:02:40] [ INFO ] [LoggingFilter:186] - CLOSED
+[2013-07-23 21:02:40] [ INFO ] [LoggingFilter:186] - CREATED
+[2013-07-23 21:02:40] [ INFO ] [ConnectionHandler:27] - Incoming connection on address /184.89.224.239:52639
+[2013-07-23 21:02:40] [ INFO ] [LoggingFilter:186] - OPENED
+[2013-07-23 21:02:40] [ INFO ] [ConnectionHandler:37] - Anonymous user has established a connection.
+[2013-07-23 21:02:40] [ INFO ] [LoggingFilter:157] - SENT: HeapBuffer[pos=0 lim=0 cap=0: empty]
+[2013-07-23 21:02:40] [ INFO ] [ConnectionHandler:59] - Anonymous user has disconnected
+[2013-07-23 21:02:40] [ INFO ] [LoggingFilter:186] - CLOSED
+[2013-07-23 21:02:41] [ INFO ] [LoggingFilter:186] - CREATED
+[2013-07-23 21:02:41] [ INFO ] [ConnectionHandler:27] - Incoming connection on address /184.89.224.239:52640
+[2013-07-23 21:02:41] [ INFO ] [LoggingFilter:186] - OPENED
+[2013-07-23 21:02:41] [ INFO ] [ConnectionHandler:37] - Anonymous user has established a connection.
+[2013-07-23 21:02:41] [ INFO ] [LoggingFilter:157] - SENT: HeapBuffer[pos=0 lim=0 cap=0: empty]
+[2013-07-23 21:02:41] [ INFO ] [ConnectionHandler:59] - Anonymous user has disconnected
+[2013-07-23 21:02:41] [ INFO ] [LoggingFilter:186] - CLOSED
+[2013-07-23 21:02:41] [ INFO ] [LoggingFilter:186] - CREATED
+[2013-07-23 21:02:41] [ INFO ] [ConnectionHandler:27] - Incoming connection on address /184.89.224.239:52645
+[2013-07-23 21:02:41] [ INFO ] [LoggingFilter:186] - OPENED
+[2013-07-23 21:02:41] [ INFO ] [ConnectionHandler:37] - Anonymous user has established a connection.
+[2013-07-23 21:02:41] [ INFO ] [LoggingFilter:157] - SENT: HeapBuffer[pos=0 lim=0 cap=0: empty]
+[2013-07-23 21:02:41] [ INFO ] [ConnectionHandler:59] - Anonymous user has disconnected
+[2013-07-23 21:02:41] [ INFO ] [LoggingFilter:186] - CLOSED
+[2013-07-23 21:02:42] [ INFO ] [LoggingFilter:186] - CREATED
+[2013-07-23 21:02:42] [ INFO ] [ConnectionHandler:27] - Incoming connection on address /184.89.224.239:52646
+[2013-07-23 21:02:42] [ INFO ] [LoggingFilter:186] - OPENED
+[2013-07-23 21:02:42] [ INFO ] [ConnectionHandler:37] - Anonymous user has established a connection.
+[2013-07-23 21:02:42] [ INFO ] [LoggingFilter:157] - SENT: HeapBuffer[pos=0 lim=0 cap=0: empty]
+[2013-07-23 21:02:42] [ INFO ] [ConnectionHandler:59] - Anonymous user has disconnected
+[2013-07-23 21:02:42] [ INFO ] [LoggingFilter:186] - CLOSED
+[2013-07-23 21:02:42] [ INFO ] [LoggingFilter:186] - CREATED
+[2013-07-23 21:02:42] [ INFO ] [ConnectionHandler:27] - Incoming connection on address /184.89.224.239:52651
+[2013-07-23 21:02:42] [ INFO ] [LoggingFilter:186] - OPENED
+[2013-07-23 21:02:42] [ INFO ] [ConnectionHandler:37] - Anonymous user has established a connection.
+[2013-07-23 21:02:42] [ INFO ] [LoggingFilter:157] - SENT: HeapBuffer[pos=0 lim=0 cap=0: empty]
+[2013-07-23 21:02:42] [ INFO ] [LoggingFilter:186] - CLOSED
+[2013-07-23 21:02:42] [ INFO ] [LoggingFilter:186] - CLOSED
+[2013-07-23 21:02:42] [ INFO ] [LoggingFilter:186] - CLOSED
+[2013-07-23 21:02:47] [ INFO ] [LoggingFilter:186] - IDLE
+[2013-07-23 21:02:51] [ INFO ] [LoggingFilter:186] - IDLE
+[2013-07-23 21:02:52] [ INFO ] [ConnectionHandler:59] - Anonymous user has disconnected
+[2013-07-23 21:02:52] [ INFO ] [LoggingFilter:186] - CLOSED
+[2013-07-23 21:02:58] [ INFO ] [LoggingFilter:186] - IDLE
+[2013-07-23 21:03:07] [ INFO ] [LoggingFilter:186] - IDLE
+[2013-07-23 21:03:14] [ INFO ] [LoggingFilter:186] - IDLE
+[2013-07-23 21:03:23] [ INFO ] [LoggingFilter:186] - IDLE
+[2013-07-23 21:03:30] [ INFO ] [LoggingFilter:186] - IDLE
+[2013-07-23 21:03:39] [ INFO ] [LoggingFilter:186] - IDLE
+[2013-07-23 21:03:46] [ INFO ] [LoggingFilter:186] - IDLE
+[2013-07-23 21:03:55] [ INFO ] [LoggingFilter:186] - IDLE
+[2013-07-23 21:04:02] [ INFO ] [LoggingFilter:186] - IDLE
+[2013-07-23 21:04:11] [ INFO ] [LoggingFilter:186] - IDLE
+[2013-07-23 21:04:18] [ INFO ] [LoggingFilter:186] - IDLE
+[2013-07-23 21:04:27] [ INFO ] [LoggingFilter:186] - IDLE
+[2013-07-23 21:04:34] [ INFO ] [LoggingFilter:186] - IDLE
+[2013-07-23 21:04:41] [ INFO ] [LoggingFilter:186] - CLOSED
+[2013-07-23 21:04:41] [ INFO ] [LoggingFilter:186] - CLOSED
