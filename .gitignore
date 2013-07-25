@@ -2,6 +2,7 @@
 
 # Ignore #
 /Configs/hibernate.cfg.xml
+/Logs/*
 
 # Package Files #
 *.jar
