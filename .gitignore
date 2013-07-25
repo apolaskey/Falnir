@@ -1,5 +1,8 @@
 *.class
 
+# Ignore #
+/Configs/hibernate.cfg.xml
+
 # Package Files #
 *.jar
 *.war

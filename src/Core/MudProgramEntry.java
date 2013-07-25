@@ -13,10 +13,11 @@ import org.slf4j.LoggerFactory;
  * TODO: Create Config file to bind this nonsense
  * @author Andrew
  */
-public class MinaTcpServer {
+public class MudProgramEntry {
 
-	private static final Logger logger = LoggerFactory.getLogger(MinaTcpServer.class);
+	private static final Logger logger = LoggerFactory.getLogger(MudProgramEntry.class);
 	private static IoAcceptor server = new NioSocketAcceptor();
+	private static MudGameLoop gameLoop;
 	
 	/**
 	 * Mina TCP Server.
@@ -43,6 +44,7 @@ public class MinaTcpServer {
         
         // Start it up!
         try {
+        	gameLoop = new MudGameLoop();
             logger.info("Starting Server on port {}", Integer.toString(MudConfig.PORT));
             server.bind(new InetSocketAddress(MudConfig.PORT));
 		} catch (IOException e) {
