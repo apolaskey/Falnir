@@ -1,4 +1,4 @@
-package Core;
+package Mud.Server.Core;
 
 import java.nio.charset.Charset;
 

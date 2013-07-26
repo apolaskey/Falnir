@@ -1,6 +1,7 @@
 *.class
 
 # Ignore #
+/bin/*
 /Configs/hibernate.cfg.xml
 /Logs/*
 

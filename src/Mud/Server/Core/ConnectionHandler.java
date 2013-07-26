@@ -1,4 +1,4 @@
-package Core;
+package Mud.Server.Core;
 
 import java.util.Date;
 import java.util.Set;

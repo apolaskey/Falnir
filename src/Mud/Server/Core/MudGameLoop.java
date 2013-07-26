@@ -1,4 +1,4 @@
-package Core;
+package Mud.Server.Core;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

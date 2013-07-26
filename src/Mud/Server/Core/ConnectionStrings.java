@@ -1,4 +1,4 @@
-package Core;
+package Mud.Server.Core;
 
 public class ConnectionStrings {
 	public final static String Welcome = "Welcome to Falnir!";

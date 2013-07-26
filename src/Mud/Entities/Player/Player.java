@@ -1,4 +1,4 @@
-package Player;
+package Mud.Entities.Player;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -6,7 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import Authentication.AuthenticationHandler;
+import Mud.Server.Authentication.AuthenticationHandler;
 
 @Entity(name="PLAYER")
 public class Player {

@@ -1,6 +1,6 @@
-package Authentication;
+package Mud.Server.Authentication;
 
-import Core.MudProgramEntry;
+import Mud.Server.Core.MudProgramEntry;
 
 public class AuthenticationHandler {
 	protected AuthenticationState currentState;
