@@ -17,13 +17,18 @@ import org.slf4j.LoggerFactory;
  */
 public class ConnectionHandler extends IoHandlerAdapter {
 	private static Logger logger = LoggerFactory.getLogger(ConnectionHandler.class);
+	protected BaseMudGameServer server;
+	
+	public ConnectionHandler(BaseMudGameServer server) {
+		// So we can reference the server from each connection
+		this.server = server;
+	}
 	
 	/**
 	 * Good place to grab user details, client, address, port, etc...
 	 */
 	@Override
-	public void sessionCreated(IoSession session)
-	{
+	public void sessionCreated(IoSession session) {
 		logger.info("Incoming connection on address {}", session.getRemoteAddress());
 		
 	}
@@ -32,16 +37,14 @@ public class ConnectionHandler extends IoHandlerAdapter {
 	 * TODO: Authenticate user here?
 	 */
 	@Override
-	public void sessionOpened(IoSession session)
-	{
+	public void sessionOpened(IoSession session) {
 		logger.info("Anonymous user has established a connection.");
 		session.write(ConnectionStrings.Welcome);
 	}
 	
 	
 	@Override
-    public void exceptionCaught( IoSession session, Throwable cause ) throws Exception
-    {
+    public void exceptionCaught(IoSession session, Throwable cause ) throws Exception {
         logger.trace(cause.getMessage());
     }		
 
@@ -50,8 +53,7 @@ public class ConnectionHandler extends IoHandlerAdapter {
 	 * TODO: More stuff lol, right now just echoing out the inputted command
 	 */
     @Override
-    public void messageReceived( IoSession session, Object message ) throws Exception
-    {
+    public void messageReceived(IoSession session, Object message ) throws Exception {
     	// Parse command through IOC method?
         String str = message.toString();
         
@@ -68,8 +70,7 @@ public class ConnectionHandler extends IoHandlerAdapter {
      * User's Game Loop essentially.
      */
     @Override
-    public void sessionIdle( IoSession session, IdleStatus status ) throws Exception
-    {
+    public void sessionIdle(IoSession session, IdleStatus status ) throws Exception {
     	
     }
     
@@ -77,8 +78,7 @@ public class ConnectionHandler extends IoHandlerAdapter {
      * TODO: Clean-up used threads? Unsure if Mina will do this for us...
      */
     @Override
-    public void sessionClosed(IoSession session)
-    {
+    public void sessionClosed(IoSession session) {
     	
     }
 }
