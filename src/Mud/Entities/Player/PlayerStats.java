@@ -1,4 +1,4 @@
-package Mud.Entities.Player;
+package mud.entities.player;
 
 /**
  * Struct like data type for Player Stats; could also be used for NPC stats.

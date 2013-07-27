@@ -1,4 +1,4 @@
-package Mud.Server.Authentication;
+package mud.server.authentication;
 
 public enum AuthenticationState {
 

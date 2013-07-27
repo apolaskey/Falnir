@@ -1,4 +1,4 @@
-package Mud.Server.Database;
+package mud.server.database;
 
 public class HibernateDriver {
 

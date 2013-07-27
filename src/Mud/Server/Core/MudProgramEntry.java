@@ -1,4 +1,4 @@
-package Mud.Server.Core;
+package mud.server.core;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;

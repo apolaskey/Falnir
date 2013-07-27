@@ -1,4 +1,4 @@
-package Mud.Game.Professions;
+package mud.game.professions;
 
 public interface IProfession {
 	

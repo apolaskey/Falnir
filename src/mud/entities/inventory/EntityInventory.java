@@ -1,4 +1,4 @@
-package Mud.Entities.Inventory;
+package mud.entities.inventory;
 
 public class EntityInventory {
 	
