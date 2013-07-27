@@ -13,3 +13,9 @@ Apache MINA - http://mina.apache.org/
 Log4j 1.2 - http://logging.apache.org/log4j/1.2/
 
 SLF4J - http://www.slf4j.org/
+
+Google Guice - https://code.google.com/p/google-guice/
+
+Google Guava - https://code.google.com/p/guava-libraries/
+
+Hibernate - http://www.hibernate.org/
