@@ -3,6 +3,8 @@ package mud.server.core;
 import java.util.Date;
 import java.util.Set;
 
+import mud.server.color.AnsiColor;
+
 import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IoSession;
@@ -63,7 +65,7 @@ public class ConnectionHandler extends IoHandlerAdapter {
             return;
         }
         logger.info("Address {} sent {} to server.", session.getRemoteAddress(), str);
-        session.write("Echo: " + message.toString());
+        session.write(AnsiColor.DARK_RED + "Echo: " + AnsiColor.BLINK + AnsiColor.BRIGHT_RED + message.toString());
     }
 
     /**

@@ -3,20 +3,11 @@
    "-//Hibernate/Hibernate Mapping DTD//EN"
    "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd">
 <hibernate-mapping>
-   <class
-      name="Mud.Entities.Player"
-      table="MESSAGES">
-      <id
-         name="id"
-         column="MESSAGE_ID">
+   <class name="Mud.Entities.Player" table="MESSAGES">
+      <id name="id" column="MESSAGE_ID">
          <generator class="increment"/>
       </id>
-      <property
-         name="text"
-         column="MESSAGE_TEXT"/>
-      <many-to-one
-         name="nextMessage"
-         cascade="all"
-         column="NEXT_MESSAGE_ID"/>
+      <property name="text" column="MESSAGE_TEXT"/>
+      <many-to-one name="nextMessage" cascade="all" column="NEXT_MESSAGE_ID"/>
    </class>
 </hibernate-mapping>

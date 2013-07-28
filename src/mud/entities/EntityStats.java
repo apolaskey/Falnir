@@ -1,10 +1,10 @@
-package mud.entities.player;
+package mud.entities;
 
 /**
- * Struct like data type for Player Stats; could also be used for NPC stats.
+ * Struct like data type for Stats; could be used for Player and NPC stats.
  * @author Andrew
  */
-public class PlayerStats {
+public class EntityStats {
 	int Health;
 	int Energy; // Energy is a universal action stat, it's true name will change on class.
 	int Experience;
