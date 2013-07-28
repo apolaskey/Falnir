@@ -26,7 +26,12 @@ public class MudConfig {
 		public static LoggingFilter GetFilter()
 		{
 			LoggingFilter filter = new LoggingFilter();
+			filter.setSessionCreatedLogLevel(LogLevel.NONE);
+			filter.setSessionOpenedLogLevel(LogLevel.NONE);
 			filter.setMessageReceivedLogLevel(LogLevel.NONE);
+			filter.setSessionIdleLogLevel(LogLevel.NONE);
+			filter.setSessionClosedLogLevel(LogLevel.NONE);
+			filter.setMessageSentLogLevel(LogLevel.NONE);
 			return filter;
 		}
 	}

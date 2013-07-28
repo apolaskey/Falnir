@@ -12,12 +12,18 @@ public class AnsiColor {
 	 */
 	public static final String DEFAULT = ESCAPE + "[0m";
 	
-	public static final String BLINK = ESCAPE + "[53m";
+
+	public static final String BOLD = ESCAPE + "[1m";
 	
 	/**
 	 * Not supported in Telnet but works in Putty
 	 */
 	public static final String UNDERLINE = ESCAPE + "[4m";
+	
+	/**
+	 * Not supported in most clients.
+	 */
+	public static final String BLINK = ESCAPE + "[1m";
 	
 	public static final String INVERSE = ESCAPE + "[7m";
 	

@@ -60,7 +60,6 @@ public class ConnectionHandler extends IoHandlerAdapter {
         String str = message.toString();
         
         if(str.trim().equalsIgnoreCase("quit") || str.trim().equalsIgnoreCase("exit")) {
-        	logger.info("Anonymous user has disconnected");
             session.close(true);
             return;
         }
@@ -73,7 +72,7 @@ public class ConnectionHandler extends IoHandlerAdapter {
      */
     @Override
     public void sessionIdle(IoSession session, IdleStatus status ) throws Exception {
-    	
+    	logger.info("Idle on address {}", session.getRemoteAddress());
     }
     
     /**
@@ -81,6 +80,7 @@ public class ConnectionHandler extends IoHandlerAdapter {
      */
     @Override
     public void sessionClosed(IoSession session) {
-    	
+    	logger.info("Address {} disconnected.", session.getRemoteAddress());
+    	Thread.currentThread().interrupt();
     }
 }

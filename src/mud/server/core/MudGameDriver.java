@@ -30,14 +30,13 @@ public class MudGameDriver implements Runnable {
 		
 	}
 	
-	@SuppressWarnings("static-access")
 	@Override
 	public void run() {
 		while(true) // Spin it into an infinite loop
 		{
 			try {
 				mainLoop();
-				threadRunner.sleep(gameTick);
+				Thread.sleep(gameTick);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}	
