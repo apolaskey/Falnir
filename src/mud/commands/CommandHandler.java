@@ -21,6 +21,6 @@ public class CommandHandler {
 	 * @return The result of execution a command in the context of a Player
 	 */
 	public Result execute() {
-		return Commands.execute(player, params);
+		return Commands.execute(commandName, player, params);
 	}
 }

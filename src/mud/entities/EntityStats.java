@@ -5,12 +5,12 @@ package mud.entities;
  * @author Andrew
  */
 public class EntityStats {
-	int Health;
-	int Energy; // Energy is a universal action stat, it's true name will change on class.
-	int Experience;
-	int ExperienceNextLevel;
+	int health;
+	int energy; // Energy is a universal action stat, it's true name will change on class.
+	int experience;
+	int experienceNextLevel;
 	
-	int Strength, Dexterity, Constitution; // Base Stats for Physical Combat
-	int Intelligence, Wisdom, Spirit; // Base Stats Magic Combat
-	int Charisma, Instinct; // These are special stats for non-combat actions
+	int strength, dexterity, constitution; // Base Stats for Physical Combat
+	int intelligence, wisdom, spirit; // Base Stats Magic Combat
+	int charisma, instinct; // These are special stats for non-combat actions
 }
