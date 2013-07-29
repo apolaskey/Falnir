@@ -1,26 +1,22 @@
 package mud.commands;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import mud.server.core.BaseMudGameServer;
+import mud.entities.player.Player;
 import mud.server.core.ConnectionHandler;
 
 public class Who extends Command {
-	
-	public Who() {
-		super("who", new ArrayList<String>());
+	public Who(String command) {
+		super("who");
 	}
 	
 	@Override
-	public Result execute() {
-		Result result = new Result();
-		
-		List<ConnectionHandler> connections = BaseMudGameServer.GetConnections();
+	public Result execute(Player player, List<String> params) {
+		Result result = new Result(); 
 
-		// Can't reach connections
-		
-		
+		// grab connections in context of a Player 
+		// filter by room? 
+		//List<ConnectionHandler> connections = GetConnections(p);
 		
 		return result;
 	}
