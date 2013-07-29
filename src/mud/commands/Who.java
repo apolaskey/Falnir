@@ -16,7 +16,7 @@ public class Who extends Command {
 
 		// grab connections in context of a Player 
 		// filter by room? 
-		//List<ConnectionHandler> connections = GetConnections(p);
+		//List<ConnectionHandler> connections = getConnectionsByPlayer(player);
 		
 		return result;
 	}
