@@ -1,19 +1,65 @@
 package mud.entities.player;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.util.Date;
 
-import mud.server.authentication.AuthenticationHandler;
+import mud.entities.EntityStats;
+import mud.entities.IGameEntity;
 
-@Entity(name="PLAYER")
-public class Player {
-	protected AuthenticationHandler authHandler;
+// Java note - implements is for interfaces and extends is for classes -.-; why can't it just be : geez
+public class Player implements IGameEntity {
+	
 	protected int id;
-	String firstName;
-	String lastName;
-	String shortDescription;
-	String longDescription;
+	
+	protected String firstName;
+	protected String lastName;
+	
+	protected String shortDescription;
+	protected String longDescription;
+	
+	protected EntityStats stats;
+	
+	// Server Information
+	protected int lastIpAddress;
+	protected boolean isBanned;
+	protected boolean isSuspended;
+	protected Date suspensionStartDate;
+	protected Date suspensionEndDate;
+	
+	public Player(String firstName, String password) {
+		
+	}
+
+	@Override
+	public int GetId() {
+		return id;
+	}
+
+	@Override
+	public String GetFirstName() {
+		return firstName;
+	}
+
+	@Override
+	public String GetLastName() {
+		return lastName;
+	}
+
+	@Override
+	public String GetShortDescription() {
+		return shortDescription;
+	}
+
+	@Override
+	public String GetLongDescription() {
+		return longDescription;
+	}
+
+	@Override
+	public EntityStats GetStats() {
+		return stats;
+	}
+	
+	/**
+	 * EOF
+	 */
 }

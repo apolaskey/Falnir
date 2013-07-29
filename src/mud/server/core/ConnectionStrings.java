@@ -1,5 +1,7 @@
 package mud.server.core;
 
+import mud.server.color.AnsiCodes;
+
 public class ConnectionStrings {
 	public final static String Welcome = "Welcome to Falnir!";
 	

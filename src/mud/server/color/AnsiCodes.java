@@ -1,11 +1,18 @@
 package mud.server.color;
 
-public class AnsiColor {
+public class AnsiCodes {
 	
 	/**
 	 * ANSI Escape Character.
 	 */
 	public static final char ESCAPE = '\033';
+	
+	/**
+	 * ANSI End of Line placer, this moves the cursor up one and adds a space
+	 */
+	public static final String MoveToEOL = " " + ESCAPE + "[1A";
+	
+	public static final String CRETURN = ESCAPE + "[13m" + ESCAPE + "[10m";
 	
 	/**
 	 * Resets all color codes to the default set by user.
@@ -23,7 +30,7 @@ public class AnsiColor {
 	/**
 	 * Not supported in most clients.
 	 */
-	public static final String BLINK = ESCAPE + "[1m";
+	public static final String BLINK = ESCAPE + "[5m";
 	
 	public static final String INVERSE = ESCAPE + "[7m";
 	

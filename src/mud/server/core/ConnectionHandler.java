@@ -3,7 +3,7 @@ package mud.server.core;
 import java.util.Date;
 import java.util.Set;
 
-import mud.server.color.AnsiColor;
+import mud.server.color.AnsiCodes;
 
 import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.service.IoHandlerAdapter;
@@ -32,15 +32,17 @@ public class ConnectionHandler extends IoHandlerAdapter {
 	@Override
 	public void sessionCreated(IoSession session) {
 		logger.info("Incoming connection on address {}", session.getRemoteAddress());
-		
+		server.GetConnections().add(this);
+		logger.info("Current connections is now at {}", server.GetConnections().size());
 	}
 	
 	/**
-	 * TODO: Authenticate user here?
+	 * User Authentication or relogin
 	 */
 	@Override
 	public void sessionOpened(IoSession session) {
 		logger.info("Anonymous user has established a connection.");
+		session.write(AnsiCodes.DEFAULT); // [Bugfix] Some Telnet Clients do weird things
 		session.write(ConnectionStrings.Welcome);
 	}
 	
@@ -51,8 +53,7 @@ public class ConnectionHandler extends IoHandlerAdapter {
     }		
 
 	/**
-	 * Incoming command from user.
-	 * TODO: More stuff lol, right now just echoing out the inputted command
+	 * Handle input from the user.
 	 */
     @Override
     public void messageReceived(IoSession session, Object message ) throws Exception {
@@ -64,7 +65,8 @@ public class ConnectionHandler extends IoHandlerAdapter {
             return;
         }
         logger.info("Address {} sent {} to server.", session.getRemoteAddress(), str);
-        session.write(AnsiColor.DARK_RED + "Echo: " + AnsiColor.BLINK + AnsiColor.BRIGHT_RED + message.toString());
+        str = AnsiCodes.DARK_RED + "Echo: " + AnsiCodes.BRIGHT_RED + message.toString() + AnsiCodes.DEFAULT;
+        session.write(str + AnsiCodes.MoveToEOL);
     }
 
     /**
@@ -76,11 +78,14 @@ public class ConnectionHandler extends IoHandlerAdapter {
     }
     
     /**
-     * TODO: Clean-up used threads? Unsure if Mina will do this for us...
+     * Invoked when the user disconnects.
      */
     @Override
     public void sessionClosed(IoSession session) {
     	logger.info("Address {} disconnected.", session.getRemoteAddress());
+    	// Before removing the player from the world we might want to get their status to prevent cheating
+    	server.GetConnections().remove(this);
+    	logger.info("Current connections is now at {}", server.GetConnections().size());
     	Thread.currentThread().interrupt();
     }
 }

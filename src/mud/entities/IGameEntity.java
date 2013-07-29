@@ -6,4 +6,5 @@ public interface IGameEntity {
 	public String GetLastName();
 	public String GetShortDescription();
 	public String GetLongDescription();
+	public EntityStats GetStats();
 }

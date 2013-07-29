@@ -3,11 +3,28 @@
    "-//Hibernate/Hibernate Mapping DTD//EN"
    "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd">
 <hibernate-mapping>
-   <class name="Mud.Entities.Player" table="MESSAGES">
-      <id name="id" column="MESSAGE_ID">
-         <generator class="increment"/>
+   <!-- Get data from the Player class and create / use table PLAYER_DATA -->
+   <class name="mud.entities.player.Player" table="PLAYER_DATA">
+      <!-- Hibernate will look for getId() and setId() if named this way -->
+      <id name="id" type="integer" column="ID"> <!-- Hibernate Types can be found here: http://www.tutorialspoint.com/hibernate/hibernate_mapping_types.htm -->
+         <generator class="assigned"/> <!-- Generator Info can be found here: http://www.roseindia.net/hibernate/hibernateidgeneratorelement.shtml -->
       </id>
-      <property name="text" column="MESSAGE_TEXT"/>
-      <many-to-one name="nextMessage" cascade="all" column="NEXT_MESSAGE_ID"/>
+      
+      <property name="firstName"> <!-- I believe this pulls raw props from the class ie. Player.firstName -->
+      	<column name="FIRST_NAME"/>
+      </property>
+      
+      <property name="lastName">
+      	<column name="LAST_NAME"/>
+      </property>
+      
+      <property name="shortDescription">
+      	<column name="SHORT_DESC"/>
+      </property>
+      
+      <property name="longDescription">
+      	<column name="LONG_DESC"/>
+      </property>
+      
    </class>
 </hibernate-mapping>

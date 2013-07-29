@@ -1,6 +1,7 @@
 package mud.server.core;
 
 import java.nio.charset.Charset;
+import java.util.SortedMap;
 
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.filter.codec.textline.LineDelimiter;
@@ -45,7 +46,9 @@ public class MudConfig {
 		public static ProtocolCodecFilter GetNewlineOutput()
 		{
 			ProtocolCodecFilter filter;
-			TextLineCodecFactory textFilter = new TextLineCodecFactory(Charset.forName("UTF-8"), LineDelimiter.CRLF, LineDelimiter.AUTO);
+			// TextLineCodecFactory textFilter = new TextLineCodecFactory(Charset.forName("US-ASCII"), LineDelimiter.DEFAULT, LineDelimiter.DEFAULT);
+			
+			TextLineCodecFactory textFilter = new TextLineCodecFactory(Charset.forName("US-ASCII"));
 			filter = new ProtocolCodecFilter(textFilter);
 			return filter;
 		}
