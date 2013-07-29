@@ -42,8 +42,9 @@ public class ConnectionHandler extends IoHandlerAdapter {
 	@Override
 	public void sessionOpened(IoSession session) {
 		logger.info("Anonymous user has established a connection.");
-		session.write(AnsiCodes.DEFAULT); // [Bugfix] Some Telnet Clients do weird things
-		session.write(ConnectionStrings.Welcome);
+		session.write(ConnectionStrings.WelcomeArt);
+		session.write(AnsiCodes.ESCAPE + "[9;0H"); // Fuck-it; force home row
+		session.write(ConnectionStrings.AuthUserName + AnsiCodes.END_LINE);
 	}
 	
 	
@@ -66,7 +67,7 @@ public class ConnectionHandler extends IoHandlerAdapter {
         }
         logger.info("Address {} sent {} to server.", session.getRemoteAddress(), str);
         str = AnsiCodes.DARK_RED + "Echo: " + AnsiCodes.BRIGHT_RED + message.toString() + AnsiCodes.DEFAULT;
-        session.write(str + AnsiCodes.MoveToEOL);
+        session.write(str + AnsiCodes.END_LINE);
     }
 
     /**
@@ -82,10 +83,16 @@ public class ConnectionHandler extends IoHandlerAdapter {
      */
     @Override
     public void sessionClosed(IoSession session) {
-    	logger.info("Address {} disconnected.", session.getRemoteAddress());
+    	logger.info("Address {} keep-alive state disconnected.", session.getRemoteAddress());
+    	
+    	while(!session.getCloseFuture().isClosed()) {
+    		//No-op loop the session until it's closed.
+    	}
+    	logger.info("Address {} session has closed.", session.getRemoteAddress());
+    	
+
     	// Before removing the player from the world we might want to get their status to prevent cheating
     	server.GetConnections().remove(this);
     	logger.info("Current connections is now at {}", server.GetConnections().size());
-    	Thread.currentThread().interrupt();
     }
 }

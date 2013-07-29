@@ -1,5 +1,9 @@
 package mud.server.color;
 
+/**
+ * Contains all of the basic Telnet ANSI Codes
+ * @author Andrew
+ */
 public class AnsiCodes {
 	
 	/**
@@ -7,19 +11,33 @@ public class AnsiCodes {
 	 */
 	public static final char ESCAPE = '\033';
 	
-	/**
-	 * ANSI End of Line placer, this moves the cursor up one and adds a space
-	 */
-	public static final String MoveToEOL = " " + ESCAPE + "[1A";
-	
-	public static final String CRETURN = ESCAPE + "[13m" + ESCAPE + "[10m";
+	/*=======================================================*/
+	// CURSOR PLACEMENT
+	/*=======================================================*/
 	
 	/**
 	 * Resets all color codes to the default set by user.
 	 */
 	public static final String DEFAULT = ESCAPE + "[0m";
 	
-
+	/**
+	 * ANSI End of Line placer, this moves the cursor up one and adds a space
+	 */
+	public static final String END_LINE = " " + ESCAPE + "[1A";
+	
+	/**
+	 * New Line / Carriage Return
+	 */
+	public static final String NEWLINE = "\r\n";
+	
+	
+	/*=======================================================*/
+	// TEXT FORMATTING
+	/*=======================================================*/
+	
+	/**
+	 * I don't think it works? None of my test clients do anything
+	 */
 	public static final String BOLD = ESCAPE + "[1m";
 	
 	/**
@@ -28,12 +46,19 @@ public class AnsiCodes {
 	public static final String UNDERLINE = ESCAPE + "[4m";
 	
 	/**
-	 * Not supported in most clients.
+	 * Umm...dosn't blink but I have confirmed this is the code.
 	 */
 	public static final String BLINK = ESCAPE + "[5m";
 	
+	/**
+	 * Inverts the background with the foreground.
+	 */
 	public static final String INVERSE = ESCAPE + "[7m";
 	
+	/*=======================================================*/
+	// COLORS
+	// I believe the below are self-explanatory
+	/*=======================================================*/
 	public static final String BLACK = ESCAPE + "[0;30m";
 	public static final String GRAY = ESCAPE + "[1;30m";
 	
@@ -55,13 +80,10 @@ public class AnsiCodes {
 	public static final String DARK_CYAN = ESCAPE + "[0;36m";
 	public static final String BRIGHT_CYAN = ESCAPE + "[1;36m";
 	
-	/**
-	 * Dont use to reset color please.
-	 */
 	public static final String DARK_WHITE = ESCAPE + "[0;37m";
-	/**
-	 * Dont use to reset color please.
-	 */
 	public static final String BRIGHT_WHITE = ESCAPE + "[1;37m";
 	
+	/**
+	 * EOF
+	 */
 }
