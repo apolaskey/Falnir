@@ -46,7 +46,7 @@ public class MudConfig {
 		public static ProtocolCodecFilter GetNewlineOutput()
 		{
 			ProtocolCodecFilter filter;
-			// TextLineCodecFactory textFilter = new TextLineCodecFactory(Charset.forName("US-ASCII"), LineDelimiter.DEFAULT, LineDelimiter.DEFAULT);
+			//TextLineCodecFactory textFilter = new TextLineCodecFactory(Charset.forName("US-ASCII"), LineDelimiter.DEFAULT, LineDelimiter.DEFAULT);
 			
 			TextLineCodecFactory textFilter = new TextLineCodecFactory(Charset.forName("US-ASCII"));
 			filter = new ProtocolCodecFilter(textFilter);
