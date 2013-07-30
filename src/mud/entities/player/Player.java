@@ -29,8 +29,9 @@ public class Player implements IGameEntity {
 	protected Date suspensionEndDate;
 	protected ConnectionHandler connection;
 	
-	public Player(String firstName, String password) {
-		
+	public Player(int id, ConnectionHandler connection) {
+		this.connection = connection;
+		connection.GetSession().getRemoteAddress();
 	}
 
 	@Override
@@ -47,6 +48,7 @@ public class Player implements IGameEntity {
 	public String getLastName() {
 		return lastName;
 	}
+    
 
 	@Override
 	public String getShortDescription() {
@@ -65,6 +67,30 @@ public class Player implements IGameEntity {
 	
 	public ConnectionHandler getConnection() {
 		return this.connection;
+	}
+
+	@Override
+	public String setFirstName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String setLastName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String setShortDescription() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String setLongDescription() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	/**

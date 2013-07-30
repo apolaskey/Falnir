@@ -20,6 +20,11 @@ import org.slf4j.LoggerFactory;
 public class ConnectionHandler extends IoHandlerAdapter {
 	private static Logger logger = LoggerFactory.getLogger(ConnectionHandler.class);
 	protected BaseMudGameServer server;
+	protected IoSession currentSession;
+	
+	public IoSession GetSession() {
+		return currentSession;
+	}
 	
 	public ConnectionHandler(BaseMudGameServer server) {
 		// So we can reference the server from each connection
