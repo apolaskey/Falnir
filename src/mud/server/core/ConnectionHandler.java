@@ -37,10 +37,9 @@ public class ConnectionHandler extends IoHandlerAdapter {
 	@Override
 	public void sessionCreated(IoSession session) {
 		logger.info("Incoming connection on address {}", session.getRemoteAddress());
-		
 		//TODO: Test later as I don't trust Java's reference handling
 		server.getConnections().add(this);
-		sessionHandler = new SessionHandler(server, this);
+		sessionHandler = new SessionHandler(server, this, session);
 		authentication = new AuthenticationDriver(server, sessionHandler);
 		logger.info("Current connections is now at {}", server.getConnections().size());
 	}

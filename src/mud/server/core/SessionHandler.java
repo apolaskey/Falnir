@@ -15,10 +15,10 @@ public class SessionHandler {
 	private ConnectionHandler connectionHandler;
 	private IoSession session;
 	
-	public SessionHandler(BaseMudGameServer server, ConnectionHandler connectionHandler) {
+	public SessionHandler(BaseMudGameServer server, ConnectionHandler connectionHandler, IoSession session) {
 		this.server = server;
 		this.connectionHandler = connectionHandler;
-		this.session = this.connectionHandler.getSessionHandler().session;
+		this.session = session;
 	}
 	
 	public BaseMudGameServer getServer() {
