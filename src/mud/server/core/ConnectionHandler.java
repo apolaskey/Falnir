@@ -1,14 +1,12 @@
 package mud.server.core;
 
-import java.util.Date;
-import java.util.Set;
-
+import mud.server.authentication.AuthenticationDriver;
 import mud.server.color.AnsiCodes;
 
 import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IoSession;
-import org.apache.mina.util.Base64;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,17 +16,20 @@ import org.slf4j.LoggerFactory;
  *
  */
 public class ConnectionHandler extends IoHandlerAdapter {
-	private static Logger logger = LoggerFactory.getLogger(ConnectionHandler.class);
-	protected BaseMudGameServer server;
+	private static final Logger logger = LoggerFactory.getLogger(ConnectionHandler.class);
+	protected static BaseMudGameServer server;
+	
+	protected AuthenticationDriver authentication;
+	protected SessionHandler sessionHandler;
 	protected IoSession currentSession;
 	
-	public IoSession GetSession() {
-		return currentSession;
+	public SessionHandler GetSession() {
+		return sessionHandler;
 	}
 	
 	public ConnectionHandler(BaseMudGameServer server) {
 		// So we can reference the server from each connection
-		this.server = server;
+		ConnectionHandler.server = server;
 	}
 	
 	/**
@@ -37,7 +38,12 @@ public class ConnectionHandler extends IoHandlerAdapter {
 	@Override
 	public void sessionCreated(IoSession session) {
 		logger.info("Incoming connection on address {}", session.getRemoteAddress());
+		
+		//TODO: Test later as I don't trust Java's reference handling
 		server.GetConnections().add(this);
+		currentSession = session;
+		sessionHandler = new SessionHandler(server, this);
+		authentication = new AuthenticationDriver(server, sessionHandler);
 		logger.info("Current connections is now at {}", server.GetConnections().size());
 	}
 	
@@ -49,7 +55,7 @@ public class ConnectionHandler extends IoHandlerAdapter {
 		logger.info("Anonymous user has established a connection.");
 		session.write(ConnectionStrings.WelcomeArt);
 		session.write(AnsiCodes.ESCAPE + "[9;0H"); // Fuck-it; force home row
-		session.write(ConnectionStrings.AuthUserName + AnsiCodes.END_LINE);
+		authentication.DoWelcomeLogin();
 	}
 	
 	

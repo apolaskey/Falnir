@@ -5,10 +5,11 @@ import java.util.Date;
 import mud.entities.EntityStats;
 import mud.entities.IGameEntity;
 import mud.server.core.ConnectionHandler;
+import mud.server.core.SessionHandler;
 
 // Java note - implements is for interfaces and extends is for classes -.-; why can't it just be : geez
 // ^^^^
-// this ain't no C# !
+// this ain't no C# ! <-- Who spaces their punctuation like that?
 public class Player implements IGameEntity {
 	
 	protected int id;
@@ -27,11 +28,14 @@ public class Player implements IGameEntity {
 	protected boolean isSuspended;
 	protected Date suspensionStartDate;
 	protected Date suspensionEndDate;
-	protected ConnectionHandler connection;
+	protected SessionHandler session;
 	
-	public Player(int id, ConnectionHandler connection) {
-		this.connection = connection;
-		connection.GetSession().getRemoteAddress();
+	public Player(int id, SessionHandler session) {
+		this.session = session;
+	}
+	
+	public SessionHandler getSession() {
+		return this.session;
 	}
 
 	@Override
@@ -64,33 +68,25 @@ public class Player implements IGameEntity {
 	public EntityStats getStats() {
 		return stats;
 	}
-	
-	public ConnectionHandler getConnection() {
-		return this.connection;
+
+	@Override
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
 	@Override
-	public String setFirstName() {
-		// TODO Auto-generated method stub
-		return null;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	@Override
-	public String setLastName() {
-		// TODO Auto-generated method stub
-		return null;
+	public void setShortDescription(String shortDescription) {
+		this.shortDescription = shortDescription;
 	}
 
 	@Override
-	public String setShortDescription() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String setLongDescription() {
-		// TODO Auto-generated method stub
-		return null;
+	public void setLongDescription(String longDescription) {
+		this.longDescription = longDescription;
 	}
 	
 	/**

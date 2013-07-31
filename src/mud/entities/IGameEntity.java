@@ -2,13 +2,18 @@ package mud.entities;
 
 public interface IGameEntity {
 	public int getId();
-	public String setFirstName();
+	
+	public void setFirstName(String firstName);
 	public String getFirstName();
-	public String setLastName();
+	
+	public void setLastName(String lastName);
 	public String getLastName();
-	public String setShortDescription();
+	
+	public void setShortDescription(String shortDescription);
 	public String getShortDescription();
-	public String setLongDescription();
+	
+	public void setLongDescription(String longDescription);
 	public String getLongDescription();
+	
 	public EntityStats getStats();
 }
