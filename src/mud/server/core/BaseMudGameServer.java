@@ -19,33 +19,7 @@ public abstract class BaseMudGameServer {
 	private IoAcceptor acceptor = new NioSocketAcceptor();
 	private MudGameDriver gameLoop;
 	
-	// Use the Java.Util list not the Java.awt (Sillyness)
 	private List<ConnectionHandler> connections = new ArrayList<ConnectionHandler>();	
-
-	/**
-	 * Apache Mina's IoAcceptor
-	 * @return (IoAcceptor as NioSocketAcceptor)
-	 */
-	public IoAcceptor GetAcceptor() {
-		return acceptor;
-	}
-	
-	/**
-	 * Game related Logic
-	 * @return (MudGameDriver)
-	 */
-	public MudGameDriver GetGame() {
-		return gameLoop;
-	}
-	
-	/**
-	 * Active Connections to the Server
-	 * @return
-	 */
-	public List<ConnectionHandler> GetConnections() {
-		return connections; // Should create our own list to add events
-	}
-	
 	
 	/**
 	 * Base type for a Mud Game Server, will setup and prepare from configs.
@@ -54,8 +28,8 @@ public abstract class BaseMudGameServer {
 		logger.info("Setting Configurations.");
 		
 		// Bind slf4j logging to Apache Mina Lib
-		acceptor.getFilterChain().addLast("logger", MudConfig.Logging.GetFilter());
-		acceptor.getFilterChain().addLast("codec", MudConfig.TextOutput.GetNewlineOutput());
+		acceptor.getFilterChain().addLast("logger", MudConfig.Logging.getFilter());
+		acceptor.getFilterChain().addLast("codec",  MudConfig.TextOutput.getNewlineOutput());
 		
 		// Add our Connection Handler to Apache Mina's NIO
 		acceptor.setHandler(new ConnectionHandler(this));
@@ -76,6 +50,31 @@ public abstract class BaseMudGameServer {
 			logger.trace("Port already in use!");
 		}
 	}
+	
+	/**
+	 * Apache Mina's IoAcceptor
+	 * @return (IoAcceptor as NioSocketAcceptor)
+	 */
+	public IoAcceptor getAcceptor() {
+		return acceptor;
+	}
+	
+	/**
+	 * Game related Logic
+	 * @return (MudGameDriver)
+	 */
+	public MudGameDriver getGame() {
+		return gameLoop;
+	}
+	
+	/**
+	 * Active Connections to the Server
+	 * @return
+	 */
+	public List<ConnectionHandler> getConnections() {
+		return connections; // Should create our own list to add events
+	}
+	
 	/**
 	 * EOF
 	 */

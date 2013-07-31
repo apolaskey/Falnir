@@ -14,9 +14,17 @@ public class Who extends Command {
 	public Result execute(Player player, List<String> params) {
 		Result result = new Result(); 
 
-		// grab connections in context of a Player 
-		// filter by room? 
-		//List<ConnectionHandler> connections = getConnectionsByPlayer(player);
+		List<ConnectionHandler> connections = player.getSession()
+				                                    .getServer()
+				                                    .getConnections();
+		
+		for(ConnectionHandler ch : connections) {
+			result.addResult(
+					ch.getSessionHandler()
+					  .getIpAddress()
+					  .toString()
+			);
+		}
 		
 		return result;
 	}

@@ -4,31 +4,31 @@ import java.util.Date;
 
 import mud.entities.EntityStats;
 import mud.entities.IGameEntity;
-import mud.server.core.ConnectionHandler;
 import mud.server.core.SessionHandler;
 
 // Java note - implements is for interfaces and extends is for classes -.-; why can't it just be : geez
 // ^^^^
 // this ain't no C# ! <-- Who spaces their punctuation like that?
+// I didn't to have two punctuation marks next to one another #!
 public class Player implements IGameEntity {
 	
-	protected int id;
+	private int id;
 	
-	protected String firstName;
-	protected String lastName;
+	private String firstName;
+	private String lastName;
 	
-	protected String shortDescription;
-	protected String longDescription;
+	private String shortDescription;
+	private String longDescription;
 	
-	protected EntityStats stats;
+	private EntityStats stats;
 	
 	// Server Information
-	protected int lastIpAddress;
-	protected boolean isBanned;
-	protected boolean isSuspended;
-	protected Date suspensionStartDate;
-	protected Date suspensionEndDate;
-	protected SessionHandler session;
+	private int lastIpAddress;
+	private boolean isBanned;
+	private boolean isSuspended;
+	private Date suspensionStartDate;
+	private Date suspensionEndDate;
+	private SessionHandler session;
 	
 	public Player(int id, SessionHandler session) {
 		this.session = session;

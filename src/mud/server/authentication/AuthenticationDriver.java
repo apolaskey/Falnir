@@ -52,11 +52,11 @@ public class AuthenticationDriver {
 	
 	public boolean DoWelcomeLogin() {
 		logger.info("Prompting for session login.");
-		session.WriteOutput(ConnectionStrings.AuthUserName + AnsiCodes.END_LINE);
+		session.writeOutput(ConnectionStrings.AUTH_USER_NAME + AnsiCodes.END_LINE);
 		String input;
 		
 		try {
-			input = session.ReadInput();
+			input = session.readInput();
 			logger.info("Authentication Async Read: {}", input);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block

@@ -4,7 +4,6 @@ import mud.commands.Result;
 import mud.entities.player.Player;
 
 import java.util.List;
-import java.util.ArrayList;
 
 /**
  * Command.java

@@ -14,10 +14,10 @@ public class WhoIs extends Command {
 	@Override
 	public Result execute(Player player, List<String> params) {
 		Result result = new Result();
-		
-		// grab connections in context of a Player 
-		// filter by room? 
-		//List<ConnectionHandler> connections = getConnectionsByPlayer(player);
+	
+//		String playerName = params.get(0);
+//		Player otherPlayer = UTILITY?.playerFromName(playerName);
+//		result.addResult( otherPlayer.getSession().getIpAddress().toString() );
 		
 		return result;
 	}

@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
  */
 public class MudGameDriver implements Runnable {
 	private static final Logger logger = LoggerFactory.getLogger(MudGameDriver.class);
-	protected BaseMudGameServer server;
+	private BaseMudGameServer server;
 	private Thread threadRunner;
 	private int gameTick = MudConfig.GAME_TICK;
 	
@@ -30,10 +30,10 @@ public class MudGameDriver implements Runnable {
 		threadRunner.start();
 	}
 	
-	protected void mainLoop()
+	private void mainLoop()
 	{
-		
 	}
+	
 	
 	@Override
 	public void run() {

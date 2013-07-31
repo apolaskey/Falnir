@@ -21,15 +21,14 @@ public class ConnectionHandler extends IoHandlerAdapter {
 	
 	protected AuthenticationDriver authentication;
 	protected SessionHandler sessionHandler;
-	protected IoSession currentSession;
-	
-	public SessionHandler GetSession() {
-		return sessionHandler;
-	}
 	
 	public ConnectionHandler(BaseMudGameServer server) {
 		// So we can reference the server from each connection
 		ConnectionHandler.server = server;
+	}
+
+	public SessionHandler getSessionHandler() {
+		return sessionHandler;
 	}
 	
 	/**
@@ -40,11 +39,10 @@ public class ConnectionHandler extends IoHandlerAdapter {
 		logger.info("Incoming connection on address {}", session.getRemoteAddress());
 		
 		//TODO: Test later as I don't trust Java's reference handling
-		server.GetConnections().add(this);
-		currentSession = session;
+		server.getConnections().add(this);
 		sessionHandler = new SessionHandler(server, this);
 		authentication = new AuthenticationDriver(server, sessionHandler);
-		logger.info("Current connections is now at {}", server.GetConnections().size());
+		logger.info("Current connections is now at {}", server.getConnections().size());
 	}
 	
 	/**
@@ -53,7 +51,7 @@ public class ConnectionHandler extends IoHandlerAdapter {
 	@Override
 	public void sessionOpened(IoSession session) {
 		logger.info("Anonymous user has established a connection.");
-		session.write(ConnectionStrings.WelcomeArt);
+		session.write(ConnectionStrings.WELCOME_ART);
 		session.write(AnsiCodes.ESCAPE + "[9;0H"); // Fuck-it; force home row
 		authentication.DoWelcomeLogin();
 	}
@@ -103,7 +101,7 @@ public class ConnectionHandler extends IoHandlerAdapter {
     	
 
     	// Before removing the player from the world we might want to get their status to prevent cheating
-    	server.GetConnections().remove(this);
-    	logger.info("Current connections is now at {}", server.GetConnections().size());
+    	server.getConnections().remove(this);
+    	logger.info("Current connections is now at {}", server.getConnections().size());
     }
 }

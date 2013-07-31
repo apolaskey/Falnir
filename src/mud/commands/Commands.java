@@ -34,18 +34,8 @@ public final class Commands {
 			
 			return (Result)m.invoke(commandClass.newInstance(), p, params);
 		}
-		catch(NoSuchMethodException nsme) {
-			// shouldn't happen
-			nsme.printStackTrace();
-		}
-		catch(InstantiationException ie) {
-			ie.printStackTrace();
-		}
-		catch(IllegalAccessException iae) {
-			iae.printStackTrace();
-		}
-		catch(InvocationTargetException ite) {
-			ite.printStackTrace();
+		catch(Exception e) {
+			e.printStackTrace();
 		}
 		
 		

@@ -8,6 +8,7 @@ import org.apache.mina.filter.codec.textline.LineDelimiter;
 import org.apache.mina.filter.codec.textline.TextLineCodecFactory;
 import org.apache.mina.filter.logging.LogLevel;
 import org.apache.mina.filter.logging.LoggingFilter;
+import org.apache.mina.util.AvailablePortFinder;
 
 /**
  * This should really be read from a file
@@ -15,7 +16,7 @@ import org.apache.mina.filter.logging.LoggingFilter;
  *
  */
 public class MudConfig {
-	public final static int PORT = 9123;
+	public final static int PORT = AvailablePortFinder.getNextAvailable();
 	public final static int SERVER_TICK = 16;
 	public final static int GAME_TICK = 1600;
 	/**
@@ -24,7 +25,7 @@ public class MudConfig {
 	 */
 	public static class Logging
 	{
-		public static LoggingFilter GetFilter()
+		public static LoggingFilter getFilter()
 		{
 			LoggingFilter filter = new LoggingFilter();
 			filter.setSessionCreatedLogLevel(LogLevel.NONE);
@@ -43,7 +44,7 @@ public class MudConfig {
 	 */
 	public static class TextOutput
 	{
-		public static ProtocolCodecFilter GetNewlineOutput()
+		public static ProtocolCodecFilter getNewlineOutput()
 		{
 			ProtocolCodecFilter filter;
 			//TextLineCodecFactory textFilter = new TextLineCodecFactory(Charset.forName("US-ASCII"), LineDelimiter.DEFAULT, LineDelimiter.DEFAULT);
