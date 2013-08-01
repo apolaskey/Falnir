@@ -52,7 +52,7 @@ public class ConnectionHandler extends IoHandlerAdapter {
 		logger.info("Anonymous user has established a connection.");
 		session.write(ConnectionStrings.WELCOME_ART);
 		session.write(AnsiCodes.ESCAPE + "[9;0H"); // Fuck-it; force home row
-		authentication.DoWelcomeLogin();
+		authentication.doWelcomeLogin();
 	}
 	
 	

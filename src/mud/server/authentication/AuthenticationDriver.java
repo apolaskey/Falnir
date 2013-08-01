@@ -45,12 +45,12 @@ public class AuthenticationDriver {
 		return null;
 	}
 	
-	public boolean RefreshAuthStatus() {
+	public boolean refreshAuthStatus() {
 		
 		return true;
 	}
 	
-	public boolean DoWelcomeLogin() {
+	public boolean doWelcomeLogin() {
 		logger.info("Prompting for session login.");
 		session.writeOutput(ConnectionStrings.AUTH_USER_NAME + AnsiCodes.END_LINE);
 		String input;
