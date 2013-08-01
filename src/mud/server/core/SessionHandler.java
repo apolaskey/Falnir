@@ -6,8 +6,6 @@ import org.apache.mina.core.future.IoFutureListener;
 import org.apache.mina.core.future.ReadFuture;
 import org.apache.mina.core.future.WriteFuture;
 import org.apache.mina.core.session.IoSession;
-import org.apache.mina.core.buffer.IoBuffer;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -57,16 +55,12 @@ public class SessionHandler {
 		session.getConfig().setUseReadOperation(true);
 		
 		ReadFuture readFuture = session.read();
-		readFuture.await();
 		
-		Object object = readFuture.getMessage();
-		logger.info("Future: " + object);
-//		session.write( ((IoBuffer)object).duplicate());
-//		message = readFuture.getMessage().toString();
+		message = readFuture.getMessage().toString();
 		
 		session.getConfig().setUseReadOperation(false);
 		
-		return String.valueOf(object);
+		return message;
 	}
 	/**
 	 * EOF
