@@ -52,15 +52,20 @@ public class SessionHandler {
 	 * Yeah this is confusing to all hell...almost opting for a state machine
 	 */
 	public String readInput() throws InterruptedException {
-		String message = "";
+		Object object = null;
 		
 		session.getConfig().setUseReadOperation(true);
 		
 		ReadFuture readFuture = session.read();
 		readFuture.await();
 		
-		Object object = readFuture.getMessage();
-		logger.info("Future: " + object);
+		try {
+			object = readFuture.getMessage();
+			logger.info("Future: " + object);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 //		session.write( ((IoBuffer)object).duplicate());
 //		message = readFuture.getMessage().toString();
 		

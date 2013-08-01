@@ -59,6 +59,7 @@ public class ConnectionHandler extends IoHandlerAdapter {
 	@Override
     public void exceptionCaught(IoSession session, Throwable cause ) throws Exception {
         logger.trace(cause.getMessage());
+        session.close(true);
     }		
 
 	/**

@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import mud.server.authentication.AuthenticationDriver;
 
@@ -11,12 +13,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.service.IoAcceptor;
+import org.apache.mina.filter.executor.ExecutorFilter;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
 
 public abstract class BaseMudGameServer {
 	
 	private static final Logger logger = LoggerFactory.getLogger(BaseMudGameServer.class);
-	private IoAcceptor acceptor = new NioSocketAcceptor();
+	private IoAcceptor acceptor; // = new NioSocketAcceptor();
 	private MudGameDriver gameLoop;
 	
 	private List<ConnectionHandler> connections = new ArrayList<ConnectionHandler>();	
@@ -27,7 +30,10 @@ public abstract class BaseMudGameServer {
 	public BaseMudGameServer() {
 		logger.info("Setting Configurations.");
 		
+		acceptor = new NioSocketAcceptor( Runtime.getRuntime().availableProcessors() );
+		
 		// Bind slf4j logging to Apache Mina Lib
+		acceptor.getFilterChain().addLast("executor", new ExecutorFilter( Executors.newCachedThreadPool()));
 		acceptor.getFilterChain().addLast("logger", MudConfig.Logging.getFilter());
 		acceptor.getFilterChain().addLast("codec",  MudConfig.TextOutput.getNewlineOutput());
 		
