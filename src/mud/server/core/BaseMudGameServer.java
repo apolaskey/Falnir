@@ -42,6 +42,7 @@ public abstract class BaseMudGameServer {
 	public BaseMudGameServer() {
 		logger.info("Setting Configurations.");
 		
+		
 		acceptor = new NioSocketAcceptor( Runtime.getRuntime().availableProcessors() );
 
 		// utilize different cpus for some tasks

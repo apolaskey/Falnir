@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC
-   "-//Hibernate/Hibernate Mapping DTD//EN"
-   "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd">
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
    <!-- Get data from the Player class and create / use table PLAYER_DATA -->
    <class name="mud.entities.player.Player" table="PLAYER_DATA">
@@ -12,6 +12,10 @@
       
       <property name="firstName"> <!-- I believe this pulls raw props from the class ie. Player.firstName -->
       	<column name="FIRST_NAME"/>
+      </property>
+      
+      <property name="password">
+      	<column name="PASSWORD"/>
       </property>
       
       <property name="lastName">

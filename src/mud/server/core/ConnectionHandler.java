@@ -4,12 +4,16 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import mud.entities.player.Player;
 import mud.server.authentication.AuthenticationDriver;
 import mud.server.color.AnsiCodes;
+import mud.server.database.HibernateDriver;
 
 import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IoSession;
+import org.hibernate.Session;
+import org.hibernate.mapping.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,6 +47,17 @@ public class ConnectionHandler extends IoHandlerAdapter {
 		server.getConnections().add(this);
 		this.session = session;
 		logger.info("Current connections is now at {}", server.getConnections().size());
+		
+		Session sessionH = HibernateDriver.OpenSession();
+		sessionH.beginTransaction();
+		//java.util.List result = sessionH.createQuery("from PLAYER_DATA").list(); // Dosn't work...investigate
+		java.util.List result = sessionH.createSQLQuery("SELECT * FROM PLAYER_DATA").list(); // Does work -.-
+		logger.info("Players found: {}", result.size());
+		sessionH.close();
+		
+		Player a = new Player();
+		
+		
 	}
 	
 	/**

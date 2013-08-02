@@ -1,6 +1,7 @@
 package mud.entities;
 
 public interface IGameEntity {
+	public void setId(int id);
 	public int getId();
 	
 	public void setFirstName(String firstName);

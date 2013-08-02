@@ -17,6 +17,8 @@ public class Player implements IGameEntity {
 	private String firstName;
 	private String lastName;
 	
+	private String password;
+	
 	private String shortDescription;
 	private String longDescription;
 	
@@ -29,14 +31,6 @@ public class Player implements IGameEntity {
 	private Date suspensionStartDate;
 	private Date suspensionEndDate;
 	private SessionHandler session;
-	
-	public Player(int id, SessionHandler session) {
-		this.session = session;
-	}
-	
-	public SessionHandler getSession() {
-		return this.session;
-	}
 
 	@Override
 	public int getId() {
@@ -68,6 +62,11 @@ public class Player implements IGameEntity {
 	public EntityStats getStats() {
 		return stats;
 	}
+	
+	@Override
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	@Override
 	public void setFirstName(String firstName) {
@@ -87,6 +86,22 @@ public class Player implements IGameEntity {
 	@Override
 	public void setLongDescription(String longDescription) {
 		this.longDescription = longDescription;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public SessionHandler getSession() {
+		return session;
+	}
+
+	public void setSession(SessionHandler session) {
+		this.session = session;
 	}
 	
 	/**

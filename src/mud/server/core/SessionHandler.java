@@ -28,7 +28,7 @@ public class SessionHandler {
 	}
 	
 	public IoSession getIoSession() {
-		return session;  //TODO: Ask Jolt...very confused as to why this is possible
+		return session; 
 	}
 	
 	/**
