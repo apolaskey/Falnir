@@ -13,5 +13,4 @@ public class RunServer extends BaseMudGameServer {
 	public static void main(String[] args) {
 		RunServer mud = new RunServer();
 	}
-
 }

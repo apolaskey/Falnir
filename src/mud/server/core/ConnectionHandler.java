@@ -1,5 +1,9 @@
 package mud.server.core;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
 import mud.server.authentication.AuthenticationDriver;
 import mud.server.color.AnsiCodes;
 
@@ -17,10 +21,17 @@ import org.slf4j.LoggerFactory;
  */
 public class ConnectionHandler extends IoHandlerAdapter {
 	private static final Logger logger = LoggerFactory.getLogger(ConnectionHandler.class);
-	protected static BaseMudGameServer server;
+	private static BaseMudGameServer server;
 	
-	protected AuthenticationDriver authentication;
-	protected SessionHandler sessionHandler;
+//	private AuthenticationDriver authentication;
+	private SessionHandler sessionHandler;
+
+	// TODO
+//	private final Set<String> users    = 
+//			Collections.synchronizedSet(new HashSet<String>());
+//	private final Set<String> sessions = 
+//			Collections.synchronizedSet(new HashSet<String>());
+	
 	
 	public ConnectionHandler(BaseMudGameServer server) {
 		// So we can reference the server from each connection
@@ -40,19 +51,21 @@ public class ConnectionHandler extends IoHandlerAdapter {
 		//TODO: Test later as I don't trust Java's reference handling
 		server.getConnections().add(this);
 		sessionHandler = new SessionHandler(server, this, session);
-		authentication = new AuthenticationDriver(server, sessionHandler);
+//		authentication = new AuthenticationDriver(server, sessionHandler);
 		logger.info("Current connections is now at {}", server.getConnections().size());
 	}
 	
 	/**
-	 * User Authentication or relogin
+	 * User Authentication or re-login
 	 */
 	@Override
 	public void sessionOpened(IoSession session) {
-		logger.info("Anonymous user has established a connection.");
+		logger.info("User " + session.getAttribute("user") + " has connected.");
+		server.getConnections().add(this);
+		sessionHandler = new SessionHandler(server, this, session);
 		session.write(ConnectionStrings.WELCOME_ART);
 		session.write(AnsiCodes.ESCAPE + "[9;0H"); // Fuck-it; force home row
-		authentication.doWelcomeLogin();
+//		authentication.doWelcomeLogin();
 	}
 	
 	
