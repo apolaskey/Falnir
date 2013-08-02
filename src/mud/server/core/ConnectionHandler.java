@@ -22,36 +22,26 @@ import org.slf4j.LoggerFactory;
 public class ConnectionHandler extends IoHandlerAdapter {
 	private static final Logger logger = LoggerFactory.getLogger(ConnectionHandler.class);
 	private static BaseMudGameServer server;
-	
-//	private AuthenticationDriver authentication;
-	private SessionHandler sessionHandler;
 
-	// TODO
-//	private final Set<String> users    = 
-//			Collections.synchronizedSet(new HashSet<String>());
-//	private final Set<String> sessions = 
-//			Collections.synchronizedSet(new HashSet<String>());
-	
+//  Keep? Not sure.
+//	private AuthenticationDriver authentication;
+
+	private String    user;
+	private IoSession session;
 	
 	public ConnectionHandler(BaseMudGameServer server) {
 		// So we can reference the server from each connection
 		ConnectionHandler.server = server;
 	}
 
-	public SessionHandler getSessionHandler() {
-		return sessionHandler;
-	}
-	
 	/**
 	 * Good place to grab user details, client, address, port, etc...
 	 */
 	@Override
 	public void sessionCreated(IoSession session) {
 		logger.info("Incoming connection on address {}", session.getRemoteAddress());
-		//TODO: Test later as I don't trust Java's reference handling
 		server.getConnections().add(this);
-		sessionHandler = new SessionHandler(server, this, session);
-//		authentication = new AuthenticationDriver(server, sessionHandler);
+		this.session = session;
 		logger.info("Current connections is now at {}", server.getConnections().size());
 	}
 	
@@ -61,11 +51,11 @@ public class ConnectionHandler extends IoHandlerAdapter {
 	@Override
 	public void sessionOpened(IoSession session) {
 		logger.info("User " + session.getAttribute("user") + " has connected.");
-		server.getConnections().add(this);
-		sessionHandler = new SessionHandler(server, this, session);
+	
+		this.user =  session.getAttribute("user").toString();
+		
 		session.write(ConnectionStrings.WELCOME_ART);
 		session.write(AnsiCodes.ESCAPE + "[9;0H"); // Fuck-it; force home row
-//		authentication.doWelcomeLogin();
 	}
 	
 	
@@ -115,6 +105,11 @@ public class ConnectionHandler extends IoHandlerAdapter {
 
     	// Before removing the player from the world we might want to get their status to prevent cheating
     	server.getConnections().remove(this);
+    	this.session = null;
     	logger.info("Current connections is now at {}", server.getConnections().size());
+    }
+    
+    public IoSession getSession() {
+    	return this.session;
     }
 }

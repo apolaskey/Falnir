@@ -20,8 +20,8 @@ public class Who extends Command {
 		
 		for(ConnectionHandler ch : connections) {
 			result.addResult(
-					ch.getSessionHandler()
-					  .getIpAddress()
+					ch.getSession()
+					  .getRemoteAddress()
 					  .toString()
 			);
 		}

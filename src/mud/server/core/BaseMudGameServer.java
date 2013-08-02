@@ -45,7 +45,7 @@ public abstract class BaseMudGameServer {
 		acceptor = new NioSocketAcceptor( Runtime.getRuntime().availableProcessors() );
 
 		// utilize different cpus for some tasks
-		acceptor.getFilterChain().addLast("executor", new ExecutorFilter( Executors.newCachedThreadPool()));
+//		acceptor.getFilterChain().addLast("executor", new ExecutorFilter( Executors.newCachedThreadPool()));
 		// Bind slf4j logging to Apache Mina Lib
 		acceptor.getFilterChain().addLast("logger", MudConfig.Logging.getFilter());
 //		acceptor.getFilterChain().addLast("codec",  MudConfig.TextOutput.getNewlineOutput());

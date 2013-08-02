@@ -19,6 +19,7 @@ public class MudConfig {
 	public final static int PORT = 9123;
 	public final static int SERVER_TICK = 16;
 	public final static int GAME_TICK = 1600;
+	
 	/**
 	 * Logging Settings for Mina
 	 * @author Andrew

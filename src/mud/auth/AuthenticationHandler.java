@@ -26,12 +26,12 @@ import org.slf4j.LoggerFactory;
 
 public class AuthenticationHandler {
 	public static final Logger logger = LoggerFactory.getLogger(AuthenticationHandler.class);
-	@State public static final String ROOT  = "Root";
-	@State(ROOT) public static final String START = "Start";
-	@State(ROOT) public static final String WAIT_USER = "WaitUser";
+	@State public static final String ROOT                = "Root";
+	@State(ROOT) public static final String START         = "Start";
+	@State(ROOT) public static final String WAIT_USER     = "WaitUser";
 	@State(ROOT) public static final String WAIT_PASSWORD = "WaitPassword";
-	@State(ROOT) public static final String DONE = "Done";
-	@State(ROOT) public static final String FAILED = "Failed";
+	@State(ROOT) public static final String DONE          = "Done";
+	@State(ROOT) public static final String FAILED        = "Failed";
 	private final int MAX_ATTEMPTS = 5;
 	
 	// Encapsulation of login data/attempts
@@ -133,11 +133,13 @@ public class AuthenticationHandler {
 
 	@IoFilterTransition(on = IoFilterEvents.ANY, in = ROOT, weight = 1000)
 	public void unhandledEvent(Event event) {
-		logger.warn("Unhandled event: " + event.toString() + "\n\n" + event.getContext().toString());
+		logger.warn("Unhandled event: " + event.toString() + "\n\n" 
+					                    + event.getContext().toString());
 	}
 	
 	@IoFilterTransition(on = WRITE, in = {DONE, WAIT_USER, WAIT_PASSWORD})
-	public void filterWrite(AuthenticationContext context, NextFilter nextFilter, IoSession session, WriteRequest writeRequest) {
+	public void filterWrite(AuthenticationContext context, NextFilter nextFilter, 
+			                IoSession session, WriteRequest writeRequest) {
 		nextFilter.filterWrite(session, writeRequest);
 	}
 	
@@ -147,7 +149,8 @@ public class AuthenticationHandler {
 	}
 	
 	@IoFilterTransition(on = SESSION_IDLE, in = DONE)
-	public void sessionIdle(AuthenticationContext context, NextFilter nextFilter, IoSession session, IdleStatus idleStatus) {
+	public void sessionIdle(AuthenticationContext context, NextFilter nextFilter, 
+			                IoSession session, IdleStatus idleStatus) {
 		// Start connection handler
 		session.setAttribute("user", context.username);
 		nextFilter.sessionOpened(session);
