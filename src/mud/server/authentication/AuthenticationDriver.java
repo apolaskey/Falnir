@@ -52,17 +52,18 @@ public class AuthenticationDriver {
 	
 	public boolean doWelcomeLogin() {
 		logger.info("Prompting for session login.");
-		session.writeOutput(ConnectionStrings.AUTH_USER_NAME + AnsiCodes.END_LINE);
+		session.setUserReadOperation(true);
+		session.writeAsync(ConnectionStrings.AUTH_USER_NAME + AnsiCodes.END_LINE);
 		String input;
 		
 		try {
-			input = session.readInput();
+			input = session.readAsync();
 			logger.info("Authentication Async Read: {}", input);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		session.setUserReadOperation(false);
 		return false;
 	}
 	

@@ -39,37 +39,40 @@ public class SessionHandler {
 		return this.session.getRemoteAddress();
 	}
 	
+	public void write(String output) {
+		this.session.write(output);
+	}
+	
+	public void setUserReadOperation(boolean value) {
+		session.getConfig().setUseReadOperation(value);
+	}
+	
 	/**
 	 * Write out to the client asap.
 	 * Because Mina is fully threaded things might not happen instantly.
 	 * @param (String) Output text
 	 */
-	public void writeOutput(String output) {
-		this.session.write(output);
+	public void writeAsync(String output) {
+		WriteFuture writeFuture = session.write(output);
+		try {
+			writeFuture = writeFuture.await();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/**
 	 * Yeah this is confusing to all hell...almost opting for a state machine
 	 */
-	public String readInput() throws InterruptedException {
-		Object object = null;
-		
-		session.getConfig().setUseReadOperation(true);
+	public String readAsync() throws InterruptedException {
+		String message = "";
 		
 		ReadFuture readFuture = session.read();
-		readFuture.await();
+		readFuture.awaitUninterruptibly();
 		
-		try {
-			object = readFuture.getMessage();
-			logger.info("Future: " + object);
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-//		session.write( ((IoBuffer)object).duplicate());
-//		message = readFuture.getMessage().toString();
-		
-		session.getConfig().setUseReadOperation(false);
+		Object object = readFuture.getMessage();
+		logger.info("Future: " + object);
 		
 		return String.valueOf(object);
 	}
