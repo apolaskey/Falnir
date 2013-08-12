@@ -1,8 +1,11 @@
 package mud.server.core;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+
+import mud.commands.*;
 
 import mud.entities.player.Player;
 import mud.server.authentication.AuthenticationDriver;
@@ -12,6 +15,8 @@ import mud.server.database.HibernateDriver;
 import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IoSession;
+
+
 import org.hibernate.Session;
 import org.hibernate.mapping.List;
 
@@ -27,11 +32,11 @@ public class ConnectionHandler extends IoHandlerAdapter {
 	private static final Logger logger = LoggerFactory.getLogger(ConnectionHandler.class);
 	private static BaseMudGameServer server;
 
-//  Keep? Not sure.
-//	private AuthenticationDriver authentication;
+	private final Set<IoSession> sessions = 
+			Collections.synchronizedSet(new HashSet<IoSession>());
 
-	private String    user;
-	private IoSession session;
+	private final Set<String> users = 
+			Collections.synchronizedSet(new HashSet<String>());
 	
 	public ConnectionHandler(BaseMudGameServer server) {
 		// So we can reference the server from each connection
@@ -44,18 +49,18 @@ public class ConnectionHandler extends IoHandlerAdapter {
 	@Override
 	public void sessionCreated(IoSession session) {
 		logger.info("Incoming connection on address {}", session.getRemoteAddress());
-		server.getConnections().add(this);
-		this.session = session;
-		logger.info("Current connections is now at {}", server.getConnections().size());
+
 		
-		Session sessionH = HibernateDriver.OpenSession();
-		sessionH.beginTransaction();
+//		logger.info("Current connections is now at {}", server.getConnections().size());
+		
+//		Session sessionH = HibernateDriver.OpenSession();
+//		sessionH.beginTransaction();
 		//java.util.List result = sessionH.createQuery("from PLAYER_DATA").list(); // Dosn't work...investigate
-		java.util.List result = sessionH.createSQLQuery("SELECT * FROM PLAYER_DATA").list(); // Does work -.-
-		logger.info("Players found: {}", result.size());
-		sessionH.close();
+//		java.util.List result = sessionH.createSQLQuery("SELECT * FROM PLAYER_DATA").list(); // Does work -.-
+//		logger.info("Players found: {}", result.size());
+//		sessionH.close();
 		
-		Player a = new Player();
+//		Player a = new Player();
 		
 		
 	}
@@ -65,18 +70,16 @@ public class ConnectionHandler extends IoHandlerAdapter {
 	 */
 	@Override
 	public void sessionOpened(IoSession session) {
-		logger.info("User " + session.getAttribute("user") + " has connected.");
-	
-		this.user =  session.getAttribute("user").toString();
-		
-		session.write(ConnectionStrings.WELCOME_ART);
-		session.write(AnsiCodes.ESCAPE + "[9;0H"); // Fuck-it; force home row
+        session.write(ConnectionStrings.WELCOME_ART);
+        session.write(AnsiCodes.ESCAPE + "[9;0H"); // home row		
 	}
 	
 	
 	@Override
     public void exceptionCaught(IoSession session, Throwable cause ) throws Exception {
         logger.trace(cause.getMessage());
+        logger.info("Exception: closing session...\n" + cause.getMessage());
+        cause.printStackTrace();
         session.close(true);
     }		
 
@@ -85,16 +88,60 @@ public class ConnectionHandler extends IoHandlerAdapter {
 	 */
     @Override
     public void messageReceived(IoSession session, Object message ) throws Exception {
-    	// Parse command through IOC method?
-        String str = message.toString();
+       logger.info("Address {} sent {} to server.", session.getRemoteAddress(), message.toString());
+       
+       try {
+    	   Command command = (Command)message; 
+    	   String[] args   = command.getArgs();
+    	   String user     = (String)session.getAttribute("user");
+    	   String password; 
+    	   
+    	   if( command instanceof Login ) {
+    		   if( user != null ) {
+    			   session.write("User " + user + " already logged into this session.");
+    			   return;
+    		   }
+    		  
+    		   if( args.length == 2 ) {
+        		   user     = args[0];
+        		   password = args[1];
+        		   
+        		   // validate password
+    		   }
+        	   else {
+    			   session.write("Invalid login command: " + command.usage());
+    			   return;
+    		   }
+
+    		   if( users.contains(user) ) {
+    			   session.write("The name " + user + " is already in use.");
+    		   }
+     		   
+    		   sessions.add(session);
+    		   session.setAttribute("user", user);
+    		   
+    		   users.add(user);
+    		   logger.info("User " + user + " just connected with password " + password);
+    		   session.write("User " + user + " just connected with password " + password);
+    	   }
+    	   else if( command instanceof Who ) {
+    		   // Nothing for now
+    	   }
+    	   else if( command instanceof WhoIs ){
+    		   // Nothing for now
+    	   }
+       }
+       catch(Exception e) {
+    	   logger.info("Exception: " + e.getMessage());
+       }
+       
+//        if(str.trim().equalsIgnoreCase("quit") || str.trim().equalsIgnoreCase("exit")) {
+//            session.close(true);
+//            return;
+//        }
         
-        if(str.trim().equalsIgnoreCase("quit") || str.trim().equalsIgnoreCase("exit")) {
-            session.close(true);
-            return;
-        }
-        logger.info("Address {} sent {} to server.", session.getRemoteAddress(), str);
-        str = AnsiCodes.DARK_RED + "Echo: " + AnsiCodes.BRIGHT_RED + message.toString() + AnsiCodes.DEFAULT;
-        session.write(str + AnsiCodes.END_LINE);
+//        str = AnsiCodes.DARK_RED + "Echo: " + AnsiCodes.BRIGHT_RED + message.toString() + AnsiCodes.DEFAULT;
+//        session.write(str + AnsiCodes.END_LINE);
     }
 
     /**
@@ -116,15 +163,10 @@ public class ConnectionHandler extends IoHandlerAdapter {
     		//No-op loop the session until it's closed.
     	}
     	logger.info("Address {} session has closed.", session.getRemoteAddress());
-    	
+    	sessions.remove(session);
 
     	// Before removing the player from the world we might want to get their status to prevent cheating
     	server.getConnections().remove(this);
-    	this.session = null;
     	logger.info("Current connections is now at {}", server.getConnections().size());
-    }
-    
-    public IoSession getSession() {
-    	return this.session;
     }
 }

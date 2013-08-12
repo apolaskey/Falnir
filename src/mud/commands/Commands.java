@@ -20,7 +20,7 @@ public final class Commands {
 	 * @param params
 	 * @return
 	 */
-	public static Result execute(String command, Player p, List<String> params) {
+	public static String execute(String command, Player p, List<String> params) {
 		Class<? extends Command> commandClass = commandMap.get(command);
 		
 		if(commandClass == null) {
@@ -32,7 +32,7 @@ public final class Commands {
 			// grab the execute method for some subclass of Command
 			Method m = commandClass.getMethod("execute", Player.class, Object[].class);
 			
-			return (Result)m.invoke(commandClass.newInstance(), p, params);
+//			return (Result)m.invoke(commandClass.newInstance(), p, params);
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -45,6 +45,7 @@ public final class Commands {
 	public static Map<String, Class<? extends Command>> commandMap = 
 			ImmutableMap.of(
 					"who", Who.class,
-					"whois", WhoIs.class
+					"whois", WhoIs.class,
+					"login", Login.class
 			);
 }

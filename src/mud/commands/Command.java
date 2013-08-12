@@ -1,6 +1,6 @@
 package mud.commands;
 
-import mud.commands.Result;
+//import mud.commands.Result;
 import mud.entities.player.Player;
 
 import java.util.List;
@@ -15,7 +15,8 @@ import java.util.List;
 
 public abstract class Command {
 	private String name;
-
+    private String[] args; 
+    
 	/**
 	 * Default constructor
 	 * 
@@ -32,18 +33,25 @@ public abstract class Command {
 	 * @param params List of parameters that this command accepts
 	 */
 	public Command(String name) {
+		this(name, new String[]{});
+	}
+	
+	public Command(String name, String[] args) {
 		this.name = name;
+		this.args = args;
 	}
 
-	/**
-	 * All Commands must be able to execute 
-	 */
-	public abstract Result execute(Player player, List<String> params); 
-	
 	public String getName() {
 		return this.name;
 	}
+
+	public String[] getArgs() {
+		return this.args;
+	}
 	
+	public String usage() {
+		return "";
+	}
 	
 	public String toString() {
 		return this.name;

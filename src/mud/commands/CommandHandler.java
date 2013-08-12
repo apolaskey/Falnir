@@ -20,7 +20,7 @@ public class CommandHandler {
 	 * 
 	 * @return The result of execution a command in the context of a Player
 	 */
-	public Result execute() {
-		return Commands.execute(commandName, player, params);
-	}
+//	public Result execute() {
+//		return Commands.execute(commandName, player, params);
+//	}
 }
