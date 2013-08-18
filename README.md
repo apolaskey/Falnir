@@ -11,25 +11,22 @@ mvn clean install
 
 Maven Problems? Use the below .m2/settings.xml
 ======
-<settings>
-  <profiles>
-    <profile>
-      <id>falnir</id>
-      <!--Enable snapshots for the built in central repo to direct -->
-      <!--all requests to nexus via the mirror -->
-      <repositories>
-        <repository>  
-            <id>central</id>  
-            <url>http://repo1.maven.org/maven2/</url>  
-        </repository>  
-      </repositories>
-    </profile>
-  </profiles>
-  <activeProfiles>
-    <!--make the profile active all the time -->
-    <activeProfile>falnir</activeProfile>
-  </activeProfiles> 
-</settings>
+ <settings>
+   <profiles>
+     <profile>
+       <id>falnir</id>
+       <repositories>
+         <repository>  
+             <id>central</id>  
+             <url>http://repo1.maven.org/maven2/</url>  
+         </repository>  
+       </repositories>
+     </profile>
+   </profiles>
+   <activeProfiles>
+     <activeProfile>falnir</activeProfile>
+   </activeProfiles> 
+ </settings>
 
 Dependencies [Project is Maven Compatible]
 ======
