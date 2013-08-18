@@ -7,26 +7,13 @@ To Build
 ======
 
 mvn eclipse:eclipse *If your using eclipse
+
 mvn clean install
 
-Maven Problems? Use the below .m2/settings.xml
+Maven Problems? Here is a sample Settings.xml
 ======
- <settings>
-   <profiles>
-     <profile>
-       <id>falnir</id>
-       <repositories>
-         <repository>  
-             <id>central</id>  
-             <url>http://repo1.maven.org/maven2/</url>  
-         </repository>  
-       </repositories>
-     </profile>
-   </profiles>
-   <activeProfiles>
-     <activeProfile>falnir</activeProfile>
-   </activeProfiles> 
- </settings>
+
+https://digitalhangarsoftworks.atlassian.net/wiki/display/FAL/Falnir+Home
 
 Dependencies [Project is Maven Compatible]
 ======
