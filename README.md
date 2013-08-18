@@ -3,10 +3,38 @@ Falnir
 
 Classic Mud using Java and Apache MINA
 
-Dependencies
+To Build
 ======
 
-Java 1.6 SDK - http://www.oracle.com/technetwork/java/javasebusiness/downloads/java-archive-downloads-javase6-419409.html#jdk-6u45-oth-JPR
+mvn eclipse:eclipse *If your using eclipse
+mvn clean install
+
+Maven Problems? Use the below .m2/settings.xml
+======
+<settings>
+  <profiles>
+    <profile>
+      <id>falnir</id>
+      <!--Enable snapshots for the built in central repo to direct -->
+      <!--all requests to nexus via the mirror -->
+      <repositories>
+        <repository>  
+            <id>central</id>  
+            <url>http://repo1.maven.org/maven2/</url>  
+        </repository>  
+      </repositories>
+    </profile>
+  </profiles>
+  <activeProfiles>
+    <!--make the profile active all the time -->
+    <activeProfile>falnir</activeProfile>
+  </activeProfiles> 
+</settings>
+
+Dependencies [Project is Maven Compatible]
+======
+
+Java 1.7 SDK - http://www.oracle.com/technetwork/java/javasebusiness/downloads/java-archive-downloads-javase6-419409.html#jdk-6u45-oth-JPR
 
 Apache MINA - http://mina.apache.org/
 
