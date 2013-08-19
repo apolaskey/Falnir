@@ -1,4 +1,4 @@
-package mud.server.color;
+package mud.server.ansi;
 
 /**
  * Contains all of the basic Telnet ANSI Codes
@@ -29,6 +29,10 @@ public class AnsiCodes {
 	 * New Line / Carriage Return
 	 */
 	public static final String NEWLINE = "\r\n";
+	
+	public static String ShiftRow(int row) {
+		return ESCAPE + "[" + Integer.toString(row) + ";0H";
+	}
 	
 	
 	/*=======================================================*/

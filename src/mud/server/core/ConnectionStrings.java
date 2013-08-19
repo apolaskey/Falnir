@@ -1,6 +1,6 @@
 package mud.server.core;
 
-import mud.server.color.AnsiCodes;
+import mud.server.ansi.AnsiCodes;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -33,7 +33,7 @@ public class ConnectionStrings {
 		String artString = "";
 		try {
 			logger.info("Loading the welcome screen art.");
-			artString = new Scanner( new File("./Configs/WelcomeScreen.txt"), "US-ASCII" ).useDelimiter("\\A").next();
+			artString = new Scanner( new File("./src/main/resources/WelcomeScreen.txt"), "US-ASCII" ).useDelimiter("\\A").next();
 		} catch (FileNotFoundException e) {
 			logger.warn("File not found for the Welcome Screen Art!");
 		}

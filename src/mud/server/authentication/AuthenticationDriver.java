@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import mud.entities.player.Player;
-import mud.server.color.AnsiCodes;
+import mud.server.ansi.AnsiCodes;
 import mud.server.core.BaseMudGameServer;
 import mud.server.core.ConnectionHandler;
 import mud.server.core.ConnectionStrings;

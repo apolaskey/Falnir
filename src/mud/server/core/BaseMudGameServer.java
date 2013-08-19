@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.concurrent.Executors;
 
 import mud.commands.CommandDecoder;
+import mud.server.ansi.AnsiCodes;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,13 +19,19 @@ import org.apache.mina.filter.codec.textline.TextLineEncoder;
 import org.apache.mina.filter.executor.ExecutorFilter;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
 
+/**
+ * Handles all of the information related to connecting and environment info.
+ * @author Andrew
+ */
 public abstract class BaseMudGameServer {
+
+	public static final int CPU_CORES = Runtime.getRuntime().availableProcessors();
 	
 	private static final Logger logger = LoggerFactory.getLogger(BaseMudGameServer.class);
-	private IoAcceptor acceptor; // = new NioSocketAcceptor();
-	private MudGameDriver gameLoop;
 	
-	private List<ConnectionHandler> connections = new ArrayList<ConnectionHandler>();	
+	private IoAcceptor acceptor;
+	private MudGameDriver gameLoop;
+	private MudShutdownHook shutdownThread;
 	
 	/**
 	 * Base type for a Mud Game Server, will setup and prepare from configs.
@@ -32,8 +39,12 @@ public abstract class BaseMudGameServer {
 	public BaseMudGameServer() {
 		logger.info("Setting Configurations.");
 		
+		// Add exit hook to ensure the server gets unbound
+		shutdownThread = new MudShutdownHook(this);
+		Runtime.getRuntime().addShutdownHook(new Thread(shutdownThread, shutdownThread.getClass().getName()));
 		
-		acceptor = new NioSocketAcceptor( Runtime.getRuntime().availableProcessors() );
+		acceptor = new NioSocketAcceptor(CPU_CORES);
+		logger.info("Using {} CPU's for processing.", CPU_CORES);
 
 		// utilize different cpus for some tasks
 		acceptor.getFilterChain().addLast("executor", new ExecutorFilter( Executors.newCachedThreadPool()));
@@ -63,32 +74,36 @@ public abstract class BaseMudGameServer {
         	gameLoop = new MudGameDriver(this); // Bind NIO Server to Game Loop
             acceptor.bind(new InetSocketAddress(MudConfig.PORT));
 		} catch (IOException e) {
-			e.printStackTrace();
-			logger.trace("Port already in use!");
+			logger.trace(e.getMessage());
 		}
 	}
 	
 	/**
-	 * Apache Mina's IoAcceptor
-	 * @return (IoAcceptor as NioSocketAcceptor)
+	 * Send a message to all connected sessions.
+	 * @param (String) message
 	 */
-	public IoAcceptor getAcceptor() {
-		return acceptor;
+	public void broadcastMessage(String message) {
+		acceptor.broadcast(message + AnsiCodes.END_LINE);
+	}
+	
+	public void shutdown() {
+		acceptor.unbind();
+	}
+	
+	/**
+	 * Retrieves the current connection count.
+	 * @return (int) Current Active IoSessions
+	 */
+	public int getCurrentConnections()
+	{
+		return acceptor.getManagedSessionCount();
 	}
 	
 	/**
 	 * Game related Logic
-	 * @return (MudGameDriver)
+	 * @return (MudGameDriver) Active Game Loop
 	 */
 	public MudGameDriver getGame() {
 		return gameLoop;
-	}
-	
-	/**
-	 * Active Connections to the Server
-	 * @return
-	 */
-	public List<ConnectionHandler> getConnections() {
-		return connections; // Should create our own list to add events
 	}
 }

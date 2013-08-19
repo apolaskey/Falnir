@@ -32,6 +32,7 @@ public class MudGameDriver implements Runnable {
 	
 	private void mainLoop()
 	{
+		// Any and all Updateable Game Logic
 	}
 	
 	

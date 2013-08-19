@@ -2,14 +2,16 @@ package mud.server.core;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import mud.commands.*;
 
 import mud.entities.player.Player;
+import mud.server.ansi.AnsiCodes;
 import mud.server.authentication.AuthenticationDriver;
-import mud.server.color.AnsiCodes;
 import mud.server.database.HibernateDriver;
 
 import org.apache.mina.core.session.IdleStatus;
@@ -31,12 +33,8 @@ import org.slf4j.LoggerFactory;
 public class ConnectionHandler extends IoHandlerAdapter {
 	private static final Logger logger = LoggerFactory.getLogger(ConnectionHandler.class);
 	private static BaseMudGameServer server;
-
-	private final Set<IoSession> sessions = 
-			Collections.synchronizedSet(new HashSet<IoSession>());
-
-	private final Set<String> users = 
-			Collections.synchronizedSet(new HashSet<String>());
+	
+	private static Map<Long, PlayerSession> playerSessions = new HashMap<Long, PlayerSession>();
 	
 	public ConnectionHandler(BaseMudGameServer server) {
 		// So we can reference the server from each connection
@@ -48,11 +46,24 @@ public class ConnectionHandler extends IoHandlerAdapter {
 	 */
 	@Override
 	public void sessionCreated(IoSession session) {
-		logger.info("Incoming connection on address {}", session.getRemoteAddress());
-
+		logger.info("Incoming connection on address {} using session {}", session.getRemoteAddress(), session.getId());
 		
-//		logger.info("Current connections is now at {}", server.getConnections().size());
+		logger.info("Retreiving connection details...");
 		
+		for(Map.Entry<Long, PlayerSession> pSession : playerSessions.entrySet())
+		{
+			logger.info("Scanning for previous connection...");
+			String oldIp = pSession.getValue().getRemoteAddress().toString().split(":")[0];
+			String newIp = session.getRemoteAddress().toString().split(":")[0];
+			if(oldIp.equalsIgnoreCase(newIp))
+			{
+				logger.info("Reconnecting Player to Session {}", session.getId());
+				break;
+			}
+		}
+		
+		logger.info("Creating a PlayerSession instance");
+		playerSessions.put(session.getId(), new PlayerSession(session));
 //		Session sessionH = HibernateDriver.OpenSession();
 //		sessionH.beginTransaction();
 		//java.util.List result = sessionH.createQuery("from PLAYER_DATA").list(); // Dosn't work...investigate
@@ -62,7 +73,6 @@ public class ConnectionHandler extends IoHandlerAdapter {
 		
 //		Player a = new Player();
 		
-		
 	}
 	
 	/**
@@ -70,16 +80,16 @@ public class ConnectionHandler extends IoHandlerAdapter {
 	 */
 	@Override
 	public void sessionOpened(IoSession session) {
+		logger.info("Displaying Welcome screen and asking for credentials.");
         session.write(ConnectionStrings.WELCOME_ART);
-        session.write(AnsiCodes.ESCAPE + "[9;0H"); // home row		
+        session.write(AnsiCodes.ShiftRow(9)); // home row	
+        session.write(ConnectionStrings.AUTH_USER_NAME + AnsiCodes.END_LINE);
 	}
 	
 	
 	@Override
     public void exceptionCaught(IoSession session, Throwable cause ) throws Exception {
-        logger.trace(cause.getMessage());
-        logger.info("Exception: closing session...\n" + cause.getMessage());
-        cause.printStackTrace();
+        logger.error("Exception: closing session...\n", cause);
         session.close(true);
     }		
 
@@ -90,58 +100,6 @@ public class ConnectionHandler extends IoHandlerAdapter {
     public void messageReceived(IoSession session, Object message ) throws Exception {
        logger.info("Address {} sent {} to server.", session.getRemoteAddress(), message.toString());
        
-       try {
-    	   Command command = (Command)message; 
-    	   String[] args   = command.getArgs();
-    	   String user     = (String)session.getAttribute("user");
-    	   String password; 
-    	   
-    	   if( command instanceof Login ) {
-    		   if( user != null ) {
-    			   session.write("User " + user + " already logged into this session.");
-    			   return;
-    		   }
-    		  
-    		   if( args.length == 2 ) {
-        		   user     = args[0];
-        		   password = args[1];
-        		   
-        		   // validate password
-    		   }
-        	   else {
-    			   session.write("Invalid login command: " + command.usage());
-    			   return;
-    		   }
-
-    		   if( users.contains(user) ) {
-    			   session.write("The name " + user + " is already in use.");
-    		   }
-     		   
-    		   sessions.add(session);
-    		   session.setAttribute("user", user);
-    		   
-    		   users.add(user);
-    		   logger.info("User " + user + " just connected with password " + password);
-    		   session.write("User " + user + " just connected with password " + password);
-    	   }
-    	   else if( command instanceof Who ) {
-    		   // Nothing for now
-    	   }
-    	   else if( command instanceof WhoIs ){
-    		   // Nothing for now
-    	   }
-       }
-       catch(Exception e) {
-    	   logger.info("Exception: " + e.getMessage());
-       }
-       
-//        if(str.trim().equalsIgnoreCase("quit") || str.trim().equalsIgnoreCase("exit")) {
-//            session.close(true);
-//            return;
-//        }
-        
-//        str = AnsiCodes.DARK_RED + "Echo: " + AnsiCodes.BRIGHT_RED + message.toString() + AnsiCodes.DEFAULT;
-//        session.write(str + AnsiCodes.END_LINE);
     }
 
     /**
@@ -157,16 +115,14 @@ public class ConnectionHandler extends IoHandlerAdapter {
      */
     @Override
     public void sessionClosed(IoSession session) {
-    	logger.info("Address {} keep-alive state disconnected.", session.getRemoteAddress());
-    	
-    	while(!session.getCloseFuture().isClosed()) {
-    		//No-op loop the session until it's closed.
-    	}
-    	logger.info("Address {} session has closed.", session.getRemoteAddress());
-    	sessions.remove(session);
+    	logger.info("Session {} at {} keep-alive state disconnected.", session.getId(), playerSessions.get(session.getId()).getRemoteAddress());
 
-    	// Before removing the player from the world we might want to get their status to prevent cheating
-    	server.getConnections().remove(this);
-    	logger.info("Current connections is now at {}", server.getConnections().size());
+    	while(!session.getCloseFuture().isClosed()) {
+    		logger.info("Attempting to close session {} on {}", session.getId(), playerSessions.get(session.getId()).getRemoteAddress());
+    	}
+    	
+    	
+    	//logger.info("Address {} session has closed.", session.getRemoteAddress());
+    	//playerSessions.remove(session);
     }
 }
