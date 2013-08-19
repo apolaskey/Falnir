@@ -1,9 +1,6 @@
 package mud.commands;
 
-//import mud.commands.Result;
-import mud.entities.player.Player;
-
-import java.util.List;
+import mud.server.core.PlayerSession;
 
 /**
  * Command.java
@@ -14,8 +11,8 @@ import java.util.List;
  */
 
 public abstract class Command {
-	private String name;
-    private String[] args; 
+	protected String name;
+    protected String[] args; 
     
 	/**
 	 * Default constructor
@@ -49,9 +46,11 @@ public abstract class Command {
 		return this.args;
 	}
 	
-	public String usage() {
-		return "";
-	}
+	public abstract String help();
+	public abstract String failureMessage();
+	public abstract String unableToProcessMessage();
+	public abstract String successMessage();
+	public abstract boolean execute(PlayerSession session);
 	
 	public String toString() {
 		return this.name;

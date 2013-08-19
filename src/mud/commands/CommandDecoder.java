@@ -66,6 +66,7 @@ public class CommandDecoder extends TextLineDecoder {
 			} catch (Exception e) {
 				logger.info("Unexpected command entered.");
 				out.write("Huh?");
+				return;
 			}
 			
 		}

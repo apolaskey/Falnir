@@ -64,6 +64,8 @@ public class ConnectionHandler extends IoHandlerAdapter {
 		
 		logger.info("Creating a PlayerSession instance");
 		playerSessions.put(session.getId(), new PlayerSession(session));
+		session.setAttribute("state", State.WAIT);
+		
 //		Session sessionH = HibernateDriver.OpenSession();
 //		sessionH.beginTransaction();
 		//java.util.List result = sessionH.createQuery("from PLAYER_DATA").list(); // Dosn't work...investigate
@@ -99,7 +101,7 @@ public class ConnectionHandler extends IoHandlerAdapter {
     @Override
     public void messageReceived(IoSession session, Object message ) throws Exception {
        logger.info("Address {} sent {} to server.", session.getRemoteAddress(), message.toString());
-       
+       playerSessions.get(session.getId()).parseCommand((Command)message);
     }
 
     /**
