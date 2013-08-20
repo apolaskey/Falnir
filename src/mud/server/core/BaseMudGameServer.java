@@ -30,7 +30,7 @@ public abstract class BaseMudGameServer {
 	private static final Logger logger = LoggerFactory.getLogger(BaseMudGameServer.class);
 	
 	private IoAcceptor acceptor;
-	private MudGameDriver gameLoop;
+	private GameDriver gameLoop;
 	private MudShutdownHook shutdownThread;
 	
 	/**
@@ -60,7 +60,7 @@ public abstract class BaseMudGameServer {
 		);
 		
 		// Add our Connection Handler to Apache Mina's NIO
-		acceptor.setHandler( new ConnectionHandler(this) );
+		acceptor.setHandler(new ConnectionHandler());
 		
 		// Set the maximum buffer input to take in
 		acceptor.getSessionConfig().setReadBufferSize(2048);
@@ -71,7 +71,7 @@ public abstract class BaseMudGameServer {
         // Start it up!
         try {
             logger.info("Starting Server on port {}", Integer.toString(MudConfig.PORT));
-        	gameLoop = new MudGameDriver(this); // Bind NIO Server to Game Loop
+        	gameLoop = new GameDriver(this); // Bind NIO Server to Game Loop
             acceptor.bind(new InetSocketAddress(MudConfig.PORT));
 		} catch (IOException e) {
 			logger.trace(e.getMessage());
@@ -103,7 +103,7 @@ public abstract class BaseMudGameServer {
 	 * Game related Logic
 	 * @return (MudGameDriver) Active Game Loop
 	 */
-	public MudGameDriver getGame() {
+	public GameDriver getGame() {
 		return gameLoop;
 	}
 }

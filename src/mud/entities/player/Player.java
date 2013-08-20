@@ -4,7 +4,6 @@ import java.util.Date;
 
 import mud.entities.EntityStats;
 import mud.entities.IGameEntity;
-import mud.server.core.SessionHandler;
 
 // Java note - implements is for interfaces and extends is for classes -.-; why can't it just be : geez
 // ^^^^
@@ -30,7 +29,6 @@ public class Player implements IGameEntity {
 	private boolean isSuspended;
 	private Date suspensionStartDate;
 	private Date suspensionEndDate;
-	private SessionHandler session;
 
 	@Override
 	public int getId() {
@@ -94,14 +92,6 @@ public class Player implements IGameEntity {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public SessionHandler getSession() {
-		return session;
-	}
-
-	public void setSession(SessionHandler session) {
-		this.session = session;
 	}
 	
 	/**

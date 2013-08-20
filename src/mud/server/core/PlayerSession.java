@@ -4,17 +4,32 @@ import java.net.SocketAddress;
 import java.util.Arrays;
 
 import mud.commands.Command;
+import mud.commands.CommandHandler;
+import mud.server.ansi.AnsiCodes;
+import mud.server.authentication.AuthenticationHandler;
+import mud.server.authentication.AuthenticationState;
 
 import org.apache.mina.core.session.IoSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.mysql.jdbc.StringUtils;
 
 public class PlayerSession {
+	private static final Logger logger = LoggerFactory.getLogger(PlayerSession.class);
 	private IoSession ioSession;
 	private SocketAddress remoteAddress;
-	private Command command;
+	private CommandHandler commandHandler;
+	private AuthenticationHandler authHandler;
+	private Command waitCommand;
+	private MessageIoState currentState;
 	
 	public PlayerSession(IoSession session) {
 		ioSession = session;
 		remoteAddress = ioSession.getRemoteAddress();
+		commandHandler = new CommandHandler(this);
+		authHandler = new AuthenticationHandler(this);
+		currentState = MessageIoState.BLOCKED;
 	}
 	
 	/**
@@ -22,7 +37,7 @@ public class PlayerSession {
 	 * @return (long) IoSession ID
 	 */
 	public long getId() {
-		return ioSession.getId();
+		return this.ioSession.getId();
 	}
 	
 	/**
@@ -30,14 +45,31 @@ public class PlayerSession {
 	 * @return (SocketAddress)
 	 */
 	public SocketAddress getRemoteAddress() {
-		return remoteAddress;
+		return this.remoteAddress;
 	}
 	
-	public State getState() {
-		return (State)this.ioSession.getAttribute("state");
+	/**
+	 * Retrieves the current Messaging state.
+	 * @return (MessageIoState) State
+	 */
+	public MessageIoState getState() {
+		return this.currentState;
 	}
 	
-	public void setState(State newState) {
+	public void setStateToWait(Command command) {
+		this.currentState = MessageIoState.WAIT;
+		this.waitCommand = command;
+	}
+	
+	public void setStateToBlocked() {
+		
+	}
+	
+	public void setStateToAsync() {
+		
+	}
+	
+	public void setState(MessageIoState newState) {
 		this.ioSession.setAttribute("state", newState);
 	}
 
@@ -45,26 +77,40 @@ public class PlayerSession {
 		this.ioSession.write(message);
 	}
 	
-	public void parseCommand(Command command) { 
-		write("Received command " + command + " with args " + Arrays.toString(command.getArgs()));
-		switch( getState() ) {
-			case ASYNC:	
-				break;
-			case BLOCKED:
-				break;
-			case WAIT:
-				if(this.command == null) { this.command = command; }
-				
-				boolean r = command.execute(this);
-				
-				write("Login was " + (r ? "successful" : "not successful") );
-				if( r ) {
-					setState(State.ASYNC);
-					command = null;
-				}
-				break;
-			default:
-				break;
+	/**
+	 * Parse Messages coming from a player connection
+	 * @param (String) command text from player
+	 */
+	public void parseCommand(String command) {
+		
+		// If the User is authorized process messages else do auth processing
+		if(authHandler.getState() == AuthenticationState.SECURE) {
+			// Begin Normal Message Processing
+			switch(currentState) {
+				case ASYNC:	
+					// Going wild and doing anything that your heart desires
+					if(!StringUtils.isNullOrEmpty(command)) {
+						this.commandHandler.lookUpCommand(command).execute(this, command.split(" "));
+					}
+					else {
+						// TODO: Do "prompt" (basically reports out player stats)
+					}
+					break;
+				case BLOCKED:
+					// Preventing user input
+					this.ioSession.write("You can not do that right now." + AnsiCodes.END_LINE);
+					break;
+				case WAIT:
+					// Waiting on command specific input
+					this.waitCommand.execute(this, command.split(" "));
+					break;
+				default:
+					// No-op
+					break;
+			}
+		}
+		else {
+			this.authHandler.verifySession();
 		}
 	}
 	

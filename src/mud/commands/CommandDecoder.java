@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+import mud.commands.input.Commands;
 import mud.server.ansi.AnsiCodes;
 
 import org.apache.mina.core.buffer.IoBuffer;
@@ -22,7 +23,7 @@ public class CommandDecoder extends TextLineDecoder {
 	private static final Logger logger = LoggerFactory.getLogger(CommandDecoder.class);
 	
 	public CommandDecoder() {
-		super( Charset.forName("ASCII") );
+		super(Charset.forName("ASCII"));
 	}
 	
 	private Object parseCommand(String line) throws Exception {
@@ -34,7 +35,7 @@ public class CommandDecoder extends TextLineDecoder {
 		String[] arguments = Arrays.copyOfRange(commandParts, 1, commandParts.length);
 		
 		// get command class for this command
-		Class<? extends Command> c = Commands.commandMap.get(command);
+		Command c = CommandHandler.getCommands().get(command);
 	
 		// return an instance of the class passing the args
 		return Class.forName(c.getName())

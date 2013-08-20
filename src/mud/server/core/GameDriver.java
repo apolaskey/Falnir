@@ -12,15 +12,18 @@ import org.slf4j.LoggerFactory;
  * @author Andrew
  *
  */
-public class MudGameDriver implements Runnable {
-	private static final Logger logger = LoggerFactory.getLogger(MudGameDriver.class);
-	private BaseMudGameServer server;
+public class GameDriver implements Runnable {
+	private static final Logger logger = LoggerFactory.getLogger(GameDriver.class);
+	private static BaseMudGameServer server;
 	private Thread threadRunner;
 	private int gameTick = MudConfig.GAME_TICK;
 	
+	public static final BaseMudGameServer getServer() {
+		return server;
+	}
 	
 	
-	public MudGameDriver(BaseMudGameServer server)
+	public GameDriver(BaseMudGameServer server)
 	{
 		this.server = server;
 		threadRunner = new Thread(this, this.getClass().getName());

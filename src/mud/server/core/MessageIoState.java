@@ -1,5 +1,5 @@
 package mud.server.core;
 
-public enum State {
+public enum MessageIoState {
 	ASYNC, WAIT, BLOCKED;
 }

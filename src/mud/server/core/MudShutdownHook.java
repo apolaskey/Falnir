@@ -5,6 +5,9 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Handle a soft shutdown
+ * TODO: Save all players
+ * TODO: Save world state
+ * TODO: Save all the things
  * @author Andrew
  */
 public class MudShutdownHook implements Runnable {

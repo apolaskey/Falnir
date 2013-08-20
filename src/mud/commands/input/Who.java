@@ -1,14 +1,12 @@
-package mud.commands;
+package mud.commands.input;
 
+import mud.commands.Command;
 import mud.server.core.PlayerSession;
 
-public class Who extends Command {
-	public Who(String[] args) {
-		super("who", args);
-	}
+public final class Who extends Command {
 
 	@Override
-	public String help() {
+	public String usageHelp() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -20,19 +18,13 @@ public class Who extends Command {
 	}
 
 	@Override
-	public String unableToProcessMessage() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public String successMessage() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean execute(PlayerSession session) {
+	public boolean execute(PlayerSession session, String[] args) {
 		// TODO Auto-generated method stub
 		return false;
 	}

@@ -11,7 +11,6 @@ import mud.commands.*;
 
 import mud.entities.player.Player;
 import mud.server.ansi.AnsiCodes;
-import mud.server.authentication.AuthenticationDriver;
 import mud.server.database.HibernateDriver;
 
 import org.apache.mina.core.session.IdleStatus;
@@ -32,14 +31,8 @@ import org.slf4j.LoggerFactory;
  */
 public class ConnectionHandler extends IoHandlerAdapter {
 	private static final Logger logger = LoggerFactory.getLogger(ConnectionHandler.class);
-	private static BaseMudGameServer server;
 	
 	private static Map<Long, PlayerSession> playerSessions = new HashMap<Long, PlayerSession>();
-	
-	public ConnectionHandler(BaseMudGameServer server) {
-		// So we can reference the server from each connection
-		ConnectionHandler.server = server;
-	}
 
 	/**
 	 * Good place to grab user details, client, address, port, etc...
@@ -50,7 +43,7 @@ public class ConnectionHandler extends IoHandlerAdapter {
 		
 		logger.info("Retreiving connection details...");
 		
-		for(Map.Entry<Long, PlayerSession> pSession : playerSessions.entrySet())
+		/*for(Map.Entry<Long, PlayerSession> pSession : playerSessions.entrySet())
 		{
 			logger.info("Scanning for previous connection...");
 			String oldIp = pSession.getValue().getRemoteAddress().toString().split(":")[0];
@@ -60,11 +53,11 @@ public class ConnectionHandler extends IoHandlerAdapter {
 				logger.info("Reconnecting Player to Session {}", session.getId());
 				break;
 			}
-		}
+		}*/
 		
 		logger.info("Creating a PlayerSession instance");
 		playerSessions.put(session.getId(), new PlayerSession(session));
-		session.setAttribute("state", State.WAIT);
+		session.setAttribute("state", MessageIoState.WAIT);
 		
 //		Session sessionH = HibernateDriver.OpenSession();
 //		sessionH.beginTransaction();
@@ -101,7 +94,7 @@ public class ConnectionHandler extends IoHandlerAdapter {
     @Override
     public void messageReceived(IoSession session, Object message ) throws Exception {
        logger.info("Address {} sent {} to server.", session.getRemoteAddress(), message.toString());
-       playerSessions.get(session.getId()).parseCommand((Command)message);
+       playerSessions.get(session.getId()).parseCommand((String)message);
     }
 
     /**
@@ -123,8 +116,7 @@ public class ConnectionHandler extends IoHandlerAdapter {
     		logger.info("Attempting to close session {} on {}", session.getId(), playerSessions.get(session.getId()).getRemoteAddress());
     	}
     	
-    	
-    	//logger.info("Address {} session has closed.", session.getRemoteAddress());
-    	//playerSessions.remove(session);
+    	logger.info("Address {} session has closed.", playerSessions.get(session.getId()).getRemoteAddress());
+    	playerSessions.remove(session.getId());
     }
 }
