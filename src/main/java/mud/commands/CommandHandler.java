@@ -1,5 +1,6 @@
 package mud.commands;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,13 +40,23 @@ public class CommandHandler {
 	 * @return (Command+) A Command object but can be casted to a higher type
 	 */
 	public Command lookUpCommand(String commandName) {
-		Command cmd = commands.get(commandName);
+		// entire command
+		String[] commandParts = commandName.split(" ");
+		
+		// isolate name and arguments
+		String command     = commandParts[0];
+		String[] arguments = Arrays.copyOfRange(commandParts, 1, commandParts.length);
+		
+		Command cmd = commands.get(command);
 		
 		if(cmd == null) {
-			logger.info("Attempted to grab an unknown command: {}", commandName);
+			logger.warn("Attempted to grab an unknown command: {}", commandName);
+		}
+		else {
+			cmd = commands.get("errorprompt");
 		}
 		
-		return commands.get(commandName);
+		return cmd;
 	}
 	
 

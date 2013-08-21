@@ -1,29 +1,37 @@
 package mud.commands.input;
-
 import mud.commands.Command;
-import mud.server.core.GameDriver;
+import mud.server.ansi.AnsiCodes;
 import mud.server.core.PlayerSession;
 
-public final class Who extends Command {
+/**
+ * Dummy command to use for the user sending nothing
+ * @author Andrew
+ */
+public final class EmptyPrompt extends Command {
 
+	public EmptyPrompt() {
+		super();
+		super.name = "";
+	}
+	
 	@Override
 	public String usageHelp() {
-		return null;
+		return "help <command>" + AnsiCodes.END_LINE;
 	}
 
 	@Override
 	public String failureMessage() {
-		return null;
+		return successMessage();
 	}
 
 	@Override
 	public String successMessage() {
-		return null;
+		return "";
 	}
 
 	@Override
 	public boolean execute(PlayerSession session, String[] args) {
-		session.write("There are currently " + GameDriver.getServer().getCurrentConnections() + " users connected.");
 		return true;
 	}
+
 }

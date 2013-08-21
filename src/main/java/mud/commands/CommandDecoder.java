@@ -21,32 +21,30 @@ import org.slf4j.LoggerFactory;
  */
 public class CommandDecoder extends TextLineDecoder {
 	private static final Logger logger = LoggerFactory.getLogger(CommandDecoder.class);
+	private List<String> lines = new LinkedList<String>();
+	private static final String regexAllowedChars = "[^a-zA-Z0-9!<>.@\"'&]$";
+	//private static final String regexStripAll = "[^A-Za-z 0-9 \\.,\\?'\"\"!@#\\$%\\^&\\*\\(\\)-_=\\+;:<>\\/\\\\|\\}\\{\\[\\]`~]*";
+	private static final String regexStripAscii = "[^\\x20-\\x7E]";
+	
+	/*private static final ProtocolDecoderOutput decoder = new ProtocolDecoderOutput() {
+		public void write(Object message) {
+			lines.add((String)message);
+		}
+		public void flush(NextFilter nextFilter, IoSession session) {}
+	};*/
 	
 	public CommandDecoder() {
-		super(Charset.forName("ASCII"));
+		super(Charset.forName("US-ASCII"));
 	}
 	
-	private Object parseCommand(String line) throws Exception {
-		// entire command
-		String[] commandParts = line.split(" ");
-		
-		// isolate name and arguments
-		String command     = commandParts[0];
-		String[] arguments = Arrays.copyOfRange(commandParts, 1, commandParts.length);
-		
-		// get command class for this command
-		Command c = CommandHandler.getCommands().get(command);
-	
-		// return an instance of the class passing the args
-		return Class.forName(c.getName())
-				    .getConstructor( String[].class )
-				    .newInstance( new Object[] { arguments });
+	private String parseCommand(String line) throws Exception {
+		// Return cleaned line
+		return line.replaceAll(regexAllowedChars, "").replaceAll(regexStripAscii, "");
 	}
 	
 	@Override
 	public void decode(IoSession session, IoBuffer in, 
 			           final ProtocolDecoderOutput out) {
-		final List<String> lines = new LinkedList<String>();
 		
 		try {
 			super.decode(session, in, new ProtocolDecoderOutput() {
@@ -66,10 +64,14 @@ public class CommandDecoder extends TextLineDecoder {
 				out.write(parseCommand(s));
 			} catch (Exception e) {
 				logger.info("Unexpected command entered.");
-				out.write("Huh?");
+				out.write("error");
 				return;
 			}
-			
 		}
+		
+		lines.clear();
 	}
+	/**
+	 * EOC
+	 */
 }

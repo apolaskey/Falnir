@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import mud.commands.Command;
 import mud.commands.CommandHandler;
+import mud.commands.input.EmptyPrompt;
 import mud.server.ansi.AnsiCodes;
 import mud.server.authentication.AuthenticationHandler;
 import mud.server.authentication.AuthenticationState;
@@ -62,17 +63,21 @@ public class PlayerSession {
 	}
 	
 	public void setStateToBlocked() {
-		
+		this.currentState = MessageIoState.BLOCKED;
 	}
 	
 	public void setStateToAsync() {
-		
+		this.currentState = MessageIoState.ASYNC;
+		this.waitCommand = null;
 	}
 	
 	public void setState(MessageIoState newState) {
 		this.ioSession.setAttribute("state", newState);
 	}
-
+	/**
+	 * TODO: Create a buffered write to do a very large prompt; this will cutdown on tcp calls
+	 * @param message
+	 */
 	public void write(String message) {
 		this.ioSession.write(message);
 	}
@@ -87,14 +92,9 @@ public class PlayerSession {
 		if(authHandler.getState() == AuthenticationState.SECURE) {
 			// Begin Normal Message Processing
 			switch(currentState) {
-				case ASYNC:	
+				case ASYNC:
 					// Going wild and doing anything that your heart desires
-					if(!StringUtils.isNullOrEmpty(command)) {
-						this.commandHandler.lookUpCommand(command).execute(this, command.split(" "));
-					}
-					else {
-						// TODO: Do "prompt" (basically reports out player stats)
-					}
+					this.commandHandler.lookUpCommand(command).execute(this, command.split(" "));
 					break;
 				case BLOCKED:
 					// Preventing user input
