@@ -1,9 +1,19 @@
 *.class
 
+# Ignore IDE files #
+*.iml
+.idea
+.idea/*
+*.classpath
+*.project
+*.settings
+
+
 # Ignore #
-/bin/*
+/bin
 /Configs/hibernate.cfg.xml
 /Logs/*
+/target
 
 # Package Files #
 *.jar
@@ -11,5 +21,3 @@
 *.ear
 
 # Unignore Libs #
-!/Libs/*
-/target
