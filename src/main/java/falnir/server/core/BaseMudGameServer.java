@@ -6,6 +6,7 @@ import java.util.concurrent.Executors;
 
 import falnir.server.ansi.AnsiCodes;
 import falnir.server.commands.CommandDecoder;
+import falnir.server.database.HSQLDBServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,6 +30,7 @@ public abstract class BaseMudGameServer {
 	private IoAcceptor acceptor;
 	private GameDriver gameLoop;
 	private MudShutdownHook shutdownThread;
+    private HSQLDBServer hsqldbServer;
 	
 	/**
 	 * Base type for a Mud Game Server, will setup and prepare from configs.
@@ -67,6 +69,8 @@ public abstract class BaseMudGameServer {
         
         // Start it up!
         try {
+            hsqldbServer = new HSQLDBServer();
+            hsqldbServer.Start();
             logger.info("Starting Server on port {}", Integer.toString(MudConfig.PORT));
         	gameLoop = new GameDriver(this); // Bind NIO Server to Game Loop
             acceptor.bind(new InetSocketAddress(MudConfig.PORT));

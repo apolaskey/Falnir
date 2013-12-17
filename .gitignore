@@ -1,9 +1,8 @@
 *.class
 
 # Ignore IDE files #
-*.iml
 .idea
-.idea/*
+*.iml
 *.classpath
 *.project
 *.settings
@@ -12,7 +11,7 @@
 # Ignore #
 /bin
 /Configs/hibernate.cfg.xml
-/Logs/*
+/Logs
 /target
 
 # Package Files #

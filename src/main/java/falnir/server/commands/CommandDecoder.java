@@ -12,9 +12,6 @@ import org.apache.mina.filter.codec.textline.TextLineDecoder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * TODO: Instead of using this to try and parse our game falnir.mud.commands we should let it act as a filter
- */
 public class CommandDecoder extends TextLineDecoder {
 	private static final Logger logger = LoggerFactory.getLogger(CommandDecoder.class);
 	private List<String> lines = new LinkedList<String>();
